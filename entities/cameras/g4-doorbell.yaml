@@ -1,0 +1,5 @@
+-  platform: generic
+   name: G4 Doorbell
+   still_image_url: http://192.168.30.50/snap.jpeg
+   stream_source: rtsp://192.168.10.1:7447/V2sMrry4M5AieSsv
+   verify_ssl: false

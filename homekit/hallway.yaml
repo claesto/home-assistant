@@ -1,0 +1,5 @@
+# list of items exposed to Homekit/Siri
+# - light.hallway_downstairs
+# - light.hallway_first_floor
+# - light.hallway_second_floor
+[]

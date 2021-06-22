@@ -1,0 +1,7 @@
+# boolean settings
+boolean-settings:
+  mode: yaml
+  title: Boolean settings
+  icon: mdi:head-cog
+  show_in_sidebar: true
+  filename: lovelace/boolean-settings/dashboard.yaml

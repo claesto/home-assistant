@@ -1,0 +1,4 @@
+title: House
+path: house
+icon: mdi:home
+cards: !include_dir_list ../cards/house

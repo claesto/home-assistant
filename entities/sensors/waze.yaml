@@ -1,0 +1,13 @@
+- platform: waze_travel_time
+  destination: zone.work_tom
+  name: Reistijd naar werk
+  origin: zone.home
+  region: "EU"
+  vehicle_type: car
+
+- platform: waze_travel_time
+  destination: zone.home
+  name: Reistijd naar huis
+  origin: zone.work_tom
+  region: "EU"
+  vehicle_type: car
