@@ -26,6 +26,21 @@ blueprint:
           max: 3600
           unit_of_measurement: seconds
 
+    motion_entity_lux_meter:
+      name: Motion Sensor Lux meter
+      selector:
+        entity:
+          device_class: illuminance
+
+    motion_entity_lux:
+      name: Motion Sensor Lux
+      description: Lux threshold for the motion sensor
+      default: 75
+      selector:
+        number:
+          min: 50
+          max: 500
+
 # If motion is detected within the delay,
 # we restart the script.
 mode: restart
@@ -36,6 +51,10 @@ trigger:
   entity_id: !input motion_entity
   from: "off"
   to: "on"
+condition:
+  condition: numeric_state
+  entity_id: !input motion_entity_lux_meter
+  below: !input motion_entity_lux
 
 action:
   - alias: "Turn on the light"
