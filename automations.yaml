@@ -1,1 +1,13 @@
-[]
+- id: '1624892715828'
+  alias: Verlichting - berging - bewegingsmelder
+  description: Verlichting activeren bij beweging in de berging, onder 75 lux, uitschakelen
+    na 20 seconden geen beweging
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.hue_motion_sensor_berging
+      light_target:
+        entity_id: light.lamp_berging
+      no_motion_wait: 20
+      motion_entity_lux: 75
+      motion_entity_lux_meter: sensor.hue_motion_sensor_berging_light_level
