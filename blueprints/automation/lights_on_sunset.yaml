@@ -9,11 +9,14 @@ blueprint:
         target:
           entity:
             domain: light
+    offset_time:
+      selector:
+        time:
 
 trigger:
   platform: sun
   event: sunset
-  offset: "00:30:00"
+  offset: !input offset_time
 
 action:
   - alias: "Turn on the light"
