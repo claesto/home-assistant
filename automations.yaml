@@ -1,6 +1,6 @@
 - id: '1624892715828'
-  alias: Verlichting - berging - bewegingsmelder
-  description: Verlichting activeren bij beweging in de berging, onder 75 lux, uitschakelen
+  alias: verlichting - berging - aan - beweging en lux onder 60, uit na 20 seconden
+  description: Verlichting activeren bij beweging in de berging, onder 60 lux, uitschakelen
     na 20 seconden geen beweging
   use_blueprint:
     path: homeassistant/motion_light.yaml
@@ -12,18 +12,19 @@
       motion_entity_lux: 60
       motion_entity_lux_meter: sensor.hue_motion_sensor_berging_light_level
 - id: '1625850309627'
-  alias: Verlichting - zijtuin - licht aan bij zonsondergang
+  alias: verlichting - zijtuin - aan - 30 minuten na zonsondergang
   description: ''
   use_blueprint:
     path: lights_on_sunset.yaml
     input:
       light_target:
         entity_id: light.lamp_zijtuin
-- id: '1625850347189'
-  alias: Verlichting - zijtuin - licht uit om 23:00
+      offset_time: 00:30:00
+- id: '1625860388037'
+  alias: verlichting - zijtuin - uit - 23:00
   description: ''
   use_blueprint:
-    path: lights_off_midnight.yaml
+    path: lights_off_at_configured_time.yaml
     input:
       light_target:
         entity_id: light.lamp_zijtuin
