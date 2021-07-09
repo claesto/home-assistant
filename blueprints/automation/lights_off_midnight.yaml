@@ -1,0 +1,29 @@
+blueprint:
+  name: Lights off at configured time
+  description: Turn off a light at a given time
+  domain: automation
+  input:
+    light_target:
+      name: Light
+      selector:
+        target:
+          entity:
+            domain: light
+
+    turn_off_time:
+      selector:
+          time:
+    
+trigger:
+  platform: time
+  at: !input turn_off_time
+
+condition:
+  condition: state
+  entity_id: input_boolean.party
+  state: 'off'
+
+action:
+  - alias: "Turn off the light"
+    service: light.turn_off
+    target: !input light_target

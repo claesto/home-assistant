@@ -1,0 +1,11 @@
+type: vertical-stack
+title: Huis
+cards:
+  - type: glance
+    entities:
+      - entity: input_boolean.party
+        tap_action:
+          action: toggle
+      - entity: input_boolean.vacation
+        tap_action:
+          action: toggle

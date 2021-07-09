@@ -1,4 +1,4 @@
 # list of items exposed to Homekit/Siri
 # - light.living_room
 # - light.living_room_lamp
-[]
+- media_player.marantz_av7701

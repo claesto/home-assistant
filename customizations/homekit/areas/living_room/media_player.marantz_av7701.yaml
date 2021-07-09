@@ -1,0 +1,4 @@
+name: Marantz
+feature_list:
+  - feature: on_off
+  - feature: toggle_mute

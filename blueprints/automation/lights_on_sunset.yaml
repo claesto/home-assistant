@@ -1,0 +1,20 @@
+blueprint:
+  name: Lights on at sunset (with optional offset)
+  description: Turn on a light at sunset, with optional offset time
+  domain: automation
+  input:
+    light_target:
+      name: Light
+      selector:
+        target:
+          entity:
+            domain: light
+
+trigger:
+  platform: sun
+  event: sunset
+
+action:
+  - alias: "Turn on the light"
+    service: light.turn_on
+    target: !input light_target

@@ -1,0 +1,15 @@
+type: vertical-stack
+title: Berging
+cards:
+  - type: glance
+    entities:
+      - entity: light.lamp_berging
+        name: ''
+        tap_action:
+          action: toggle
+      - entity: binary_sensor.hue_motion_sensor_berging
+        name: ''
+      - entity: sensor.hue_motion_sensor_berging_light_level
+        name: ''
+      - entity: sensor.hue_motion_sensor_berging_temperature
+        name: ''

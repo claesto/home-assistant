@@ -1,5 +1,0 @@
-type: entities
-title: Boolean switches
-entities:
-  - entity: input_boolean.vacation
-  - entity: input_boolean.party

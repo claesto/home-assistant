@@ -1,0 +1,4 @@
+title: Gelijkvloers
+path: gelijkvloers
+icon: mdi:mdi:home-floor-0
+cards: !include_dir_list ../cards
