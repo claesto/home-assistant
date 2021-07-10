@@ -7,3 +7,7 @@ cards:
         name: 'Zijkant'
         tap_action:
           action: toggle
+      - entity: light.lamp_voorgevel
+        name: 'Voorgevel'
+        tap_action:
+          action: toggle
