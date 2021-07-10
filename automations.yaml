@@ -12,20 +12,36 @@
       motion_entity_lux: 60
       motion_entity_lux_meter: sensor.hue_motion_sensor_berging_light_level
 - id: '1625850309627'
-  alias: verlichting - zijtuin - aan - 30 minuten na zonsondergang
+  alias: verlichting - zijtuin en voorgevel - aan - 20 minuten na zonsondergang
   description: ''
   use_blueprint:
     path: lights_on_sunset.yaml
     input:
       light_target:
-        entity_id: light.lamp_zijtuin
-      offset_time: 00:30:00
+        entity_id:
+        - light.lamp_zijtuin
+        - light.lamp_voorgevel
+      offset_time: 00:20:00
 - id: '1625860388037'
-  alias: verlichting - zijtuin - uit - 23:00
+  alias: verlichting - zijtuin en voorgevel - uit - 23:30
   description: ''
   use_blueprint:
     path: lights_off_at_configured_time.yaml
     input:
       light_target:
-        entity_id: light.lamp_zijtuin
-      turn_off_time: '23:00:00'
+        entity_id:
+        - light.lamp_zijtuin
+        - light.lamp_voorgevel
+      turn_off_time: '23:30:00'
+- id: '1625939645313'
+  alias: verlichting - toilet - aan - beweging en lux onder 50, uit na 30 seconden
+  description: ''
+  use_blueprint:
+    path: motion_light_lux_detection.yaml
+    input:
+      motion_entity: binary_sensor.hue_motion_sensor_wc_motion
+      light_target:
+        entity_id: light.lamp_toilet
+      no_motion_wait: 30
+      motion_entity_lux_meter: sensor.hue_motion_sensor_wc_light_level
+      motion_entity_lux: 50
