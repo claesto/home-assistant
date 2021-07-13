@@ -5,3 +5,5 @@ cards:
     entity: media_player.marantz_av7701
   - type: light
     entity: light.hue_ambiance_lamp_1
+  - type: button
+    entity: switch.stopcontact_woonkamer_rechts
