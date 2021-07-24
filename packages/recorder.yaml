@@ -6,5 +6,4 @@ recorder:
     domains:
       - light
       - media_player
-      - sensor
       - switch

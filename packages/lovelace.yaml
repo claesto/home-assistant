@@ -1,5 +1,0 @@
-lovelace:
-  # default mode is 'storage' - UI managed dashboard
-  mode: storage
-
-  dashboards: !include ../lovelace/dashboards.yaml

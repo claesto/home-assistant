@@ -1,4 +1,0 @@
-title: Eerste verdieping
-path: first-floor
-icon: mdi:mdi:home-floor-1
-cards: !include_dir_list ../cards
