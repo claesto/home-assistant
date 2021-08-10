@@ -1,3 +1,4 @@
 # list of items exposed to Homekit/Siri
 # - light.master_bedroom
 - light.nachtlamp
+- light.master_bedroom_plafond

@@ -1,0 +1,6 @@
+platform: group
+name: HUE Soraya
+entities:
+  - light.hue_centris_ceiling_1
+  - light.hue_centris_spot_1
+  - light.hue_centris_spot_2

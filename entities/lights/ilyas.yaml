@@ -1,0 +1,6 @@
+platform: group
+name: HUE Ilyas
+entities:
+  - light.hue_centris_ceiling_1_2
+  - light.hue_centris_spot_1_2
+  - light.hue_centris_spot_2_2
