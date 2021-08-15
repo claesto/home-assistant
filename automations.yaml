@@ -45,3 +45,16 @@
       motion_entity_lux_meter: sensor.hue_motion_sensor_wc_light_level
       motion_entity_lux: 50
       no_motion_wait: 90
+- id: '1628975132600'
+  alias: verlichting - staanlamp - aan - zonsondergang
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: -00:15:00
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.stopcontact_woonkamer_rechts
+  mode: single
