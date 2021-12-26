@@ -1,0 +1,16 @@
+fade_in_slaapkamerverlichting:
+  alias: Fade-in slaapkamerverlichting
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_pct: 5
+    target:
+      entity_id: light.nachtlamp
+  - service: light.turn_on
+    data:
+      transition: 300
+      brightness_pct: 85
+    target:
+      entity_id: light.nachtlamp
+  mode: single
+  icon: mdi:lamps
