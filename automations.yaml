@@ -67,3 +67,17 @@
         entity_id:
         - light.lamp_zijtuin
       offset_time: 00:20:00
+- id: '1640524642103'
+  alias: Alert - weer - Meteoalarm
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.meteoalarm
+    from: 'off'
+  action:
+  - service: notify.notify
+    data:
+      title: "{{state_attr('binary_sensor.meteoalarm', 'headline')}}"
+      message: "{{state_attr('binary_sensor.meteoalarm', 'description')}} vanaf
+        {{state_attr('binary_sensor.meteoalarm', 'effective')}}"
+  mode: single
