@@ -1,5 +1,5 @@
 binary_sensor:
   - platform: meteoalarm
-    country: "BE"
-    province: "Antwerpen / Anvers"
-    language: "ne"
+    country: "belgium"
+    province: "antwerpen"
+    language: "nl-BE"

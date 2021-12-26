@@ -12,18 +12,17 @@
       motion_entity_lux: 60
       motion_entity_lux_meter: sensor.hue_motion_sensor_berging_light_level
 - id: '1625850309627'
-  alias: verlichting - zijtuin en voorgevel - aan - 20 minuten na zonsondergang
+  alias: verlichting - voorgevel - aan - 20 minuten na zonsondergang
   description: ''
   use_blueprint:
     path: lights_on_sunset.yaml
     input:
       light_target:
         entity_id:
-        - light.lamp_zijtuin
         - light.lamp_voorgevel
       offset_time: 00:20:00
 - id: '1625860388037'
-  alias: verlichting - zijtuin en voorgevel - uit - 23:15
+  alias: verlichting - zijtuin en voorgevel - uit - 22:00
   description: ''
   use_blueprint:
     path: lights_off_at_configured_time.yaml
@@ -32,19 +31,19 @@
         entity_id:
         - light.lamp_zijtuin
         - light.lamp_voorgevel
-      turn_off_time: '23:15:00'
+      turn_off_time: '22:00:00'
 - id: '1625939645313'
-  alias: verlichting - toilet - aan - beweging en lux onder 50, uit na 90 seconden
+  alias: verlichting - toilet - aan - beweging en lux onder 50, uit na 120 seconden
   description: ''
   use_blueprint:
     path: motion_light_lux_detection.yaml
     input:
-      motion_entity: binary_sensor.hue_motion_sensor_wc_motion
+      motion_entity_lux: 50
+      no_motion_wait: 120
+      motion_entity: binary_sensor.hue_motion_sensor_2_motion
       light_target:
         entity_id: light.lamp_toilet
-      motion_entity_lux_meter: sensor.hue_motion_sensor_wc_light_level
-      motion_entity_lux: 50
-      no_motion_wait: 90
+      motion_entity_lux_meter: sensor.hue_motion_sensor_2_light_level
 - id: '1628975132600'
   alias: verlichting - staanlamp - aan - zonsondergang
   description: ''
@@ -58,3 +57,13 @@
     target:
       entity_id: switch.stopcontact_woonkamer_rechts
   mode: single
+- id: '1636644968422'
+  alias: verlichting - zijtuin - aan - 20 minuten na zonsondergang
+  description: ''
+  use_blueprint:
+    path: lights_on_sunset.yaml
+    input:
+      light_target:
+        entity_id:
+        - light.lamp_zijtuin
+      offset_time: 00:20:00
