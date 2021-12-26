@@ -86,15 +86,14 @@
   description: ''
   trigger:
   - platform: time
-    at: 07:40
+    at: input_datetime.wake_up_time
   condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
+  - condition: state
+    entity_id: input_boolean.wake_up_light
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
   action:
   - service: script.turn_on
     target:
