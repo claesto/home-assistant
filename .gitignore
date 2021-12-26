@@ -27,7 +27,7 @@ deps
 __pycache__
 tts
 
-home-assistant.log
+home-assistant.log*
 home-assistant_v2.db
 
 .spotify*
