@@ -7,6 +7,7 @@
   streetname: !secret afvalbeheer_streetname
   streetnumber: !secret afvalbeheer_streetnumber
   wastecollector: RecycleApp
+  upcomingsensor: 1
   resources:
     - gft
     - papier
