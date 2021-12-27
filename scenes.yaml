@@ -1,1 +1,60 @@
-[]
+- id: '1640612029581'
+  name: Master bedroom - all lights on max.
+  entities:
+    light.nachtlamp:
+      min_mireds: 153
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 310
+      hs_color:
+      - 27.492
+      - 51.104
+      rgb_color:
+      - 255
+      - 184
+      - 124
+      xy_color:
+      - 0.476
+      - 0.379
+      entity_id:
+      - light.nachtlamp_sara
+      - light.nachtlamp_tom
+      icon: mdi:lightbulb-group
+      friendly_name: Nachtlamp
+      supported_features: 40
+      state: 'on'
+    light.master_bedroom_plafond:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      icon: hue:ceiling-fugato-four
+      friendly_name: Plafondlamp
+      supported_features: 1
+      state: 'on'
+  icon: mdi:lightbulb-on
+- id: '1640612078011'
+  name: Master bedroom - all lights off
+  entities:
+    light.master_bedroom_plafond:
+      supported_color_modes:
+      - brightness
+      icon: hue:ceiling-fugato-four
+      friendly_name: Plafondlamp
+      supported_features: 1
+      state: 'off'
+    light.nachtlamp:
+      min_mireds: 153
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      entity_id:
+      - light.nachtlamp_sara
+      - light.nachtlamp_tom
+      icon: mdi:lightbulb-group
+      friendly_name: Nachtlamp
+      supported_features: 40
+      state: 'off'
