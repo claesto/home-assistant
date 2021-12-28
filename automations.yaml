@@ -104,11 +104,13 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: sensor.morgen
-  condition: '{{ states.sensor.morgen.state != ''None'' }}'
+    entity_id: sensor.recycleapp_morgen
+  condition:
+  - condition: template
+    value_template: '{{ states.sensor.recycleapp_morgen.state != ''None'' }}'
   action:
   - service: notify.mobile_app_iphone_8_tom
     data:
       title: ♻️ Afvalophaling
-      message: Morgen ophaling van {{ states.sensor.morgen.state }}
+      message: Morgen ophaling van {{ states.sensor.recycleapp_morgen.state }}
   mode: single
