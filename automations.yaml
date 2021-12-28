@@ -99,3 +99,16 @@
     target:
       entity_id: script.fade_in_slaapkamerverlichting
   mode: single
+- id: '1640677987104'
+  alias: Garbage collection notifications
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.morgen
+  condition: '{{ states.sensor.morgen.state != ''None'' }}'
+  action:
+  - service: notify.mobile_app_iphone_8_tom
+    data:
+      title: ♻️ Afvalophaling
+      message: Morgen ophaling van {{ states.sensor.morgen.state }}
+  mode: single
