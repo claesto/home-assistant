@@ -107,7 +107,7 @@
     entity_id: sensor.recycleapp_morgen
   condition:
   - condition: template
-    value_template: '{{ states.sensor.recycleapp_morgen.state != ''None'' }}'
+    value_template: '{{ states.sensor.recycleapp_morgen.state != ''Geen'' }}'
   action:
   - service: notify.mobile_app_iphone_8_tom
     data:
