@@ -9,8 +9,6 @@ influxdb:
 
   include:
     entities:
-      - sensor.aqara_attic_humidity
-      - sensor.aqara_attic_temperature
       - sensor.aqara_bathroom_humidity
       - sensor.aqara_bathroom_temperature
       - sensor.aqara_living_room_humidity
@@ -21,3 +19,7 @@ influxdb:
       - sensor.aqara_office_temperature
       - sensor.aqara_serverrack_humidity
       - sensor.aqara_serverrack_temperature
+      - sensor.2_shelly_em_channel_1_energy
+      - sensor.2_shelly_em_channel_1_energy_returned
+      - sensor.2_shelly_em_channel_2_energy
+      - sensor.2_shelly_em_channel_2_energy_returned
