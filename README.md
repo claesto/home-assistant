@@ -123,9 +123,6 @@ I have *divided* Home Assistant into two *views*: an overview of devices, sensor
 #### Bedroom dashboard
 ![Bedroom Home Assistant dashboard](https://i.imgur.com/lK854Uq.jpg)
 
-#### Outside dashboard
-![Outside Home Assistant dashboard](https://i.imgur.com/uHLNI1f.jpg)
-
 #### Lighting dashboard
 ![Lighting Home Assistant dashboard](https://i.imgur.com/giIm0JX.jpg)
 
