@@ -1,0 +1,30 @@
+blueprint:
+  name: Turn lights off based on input datetime
+  description: Turn off lights based on the configuration of an input datetime
+  domain: automation
+  input:
+    time_entity:
+      name: (Required) Turn off time
+      selector:
+        entity:
+          domain: input_datetime
+    light_target:
+      name: (Required) Light
+      selector:
+        target:
+          entity:
+            domain: light
+
+trigger:
+  platform: time
+  at: !input time_entity
+
+condition:
+  condition: state
+  entity_id: input_boolean.party
+  state: 'off'
+
+action:
+  - alias: "Turn off the light"
+    service: light.turn_off
+    target: !input light_target

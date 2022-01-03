@@ -21,17 +21,6 @@
         entity_id:
         - light.lamp_voorgevel
       offset_time: 00:20:00
-- id: '1625860388037'
-  alias: verlichting - zijtuin en voorgevel - uit - 22:00
-  description: ''
-  use_blueprint:
-    path: lights_off_at_configured_time.yaml
-    input:
-      light_target:
-        entity_id:
-        - light.lamp_zijtuin
-        - light.lamp_voorgevel
-      turn_off_time: '22:00:00'
 - id: '1625939645313'
   alias: verlichting - toilet - aan - beweging en lux onder 50, uit na 120 seconden
   description: ''
@@ -114,3 +103,12 @@
       title: ♻️ Afvalophaling
       message: Morgen ophaling van {{ states.sensor.recycleapp_morgen.state }}
   mode: single
+- id: '1641201231964'
+  alias: Turn outside lights off based on input datetime
+  description: ''
+  use_blueprint:
+    path: lights_off_based_on_input_datetime.yaml
+    input:
+      time_entity: input_datetime.outside_lights_off_time
+      light_target:
+        area_id: buiten
