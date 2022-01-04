@@ -1,0 +1,9 @@
+platform: group
+name: Presence simulation
+entities:
+  - light.hue_ilyas
+  - light.hue_soraya
+  - light.lamp_berging
+  - light.lamp_bureau_tom_plafond
+  - light.lamp_toilet
+  - light.nachtlamp
