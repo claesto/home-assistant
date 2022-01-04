@@ -1,6 +1,6 @@
 # [Home Assistant](https://home-assistant.io) configuration
 
-![Home Assistant version](https://img.shields.io/badge/Home%20Assistant-2020.12.5-blue.svg) 
+![Home Assistant version](https://img.shields.io/badge/Home%20Assistant-2020.12.7-blue.svg) 
 ![Commits this year](https://img.shields.io/github/commit-activity/y/tomclaessens/home-assistant.svg)
 
 [@tomclaessens](https://www.github.com/tomclaessens) - also visit my [website](https://tomclaessens.be) for more information. Don't forget to :star: if this configuration helped you.
