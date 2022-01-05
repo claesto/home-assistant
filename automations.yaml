@@ -175,3 +175,52 @@
     target:
       entity_id: light.master_bedroom_plafond
   mode: single
+- id: '1641406072469'
+  alias: Arm alarm if nobody is home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.family
+    from: home
+    to: not_home
+  condition: []
+  action:
+  - service: alarm_control_panel.alarm_arm_away
+  mode: single
+- id: '1641406355882'
+  alias: Trigger alarm on motion detected when alarm is armed
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.motion_sensors
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.home_alarm
+    state: armed_away
+  action:
+  - service: alarm_control_panel.alarm_trigger
+    target:
+      entity_id: alarm_control_panel.home_alarm
+  mode: single
+- id: '1641407101821'
+  alias: Send notification when alarm is triggered
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: alarm_control_panel.home_alarm
+    to: triggered
+  condition: []
+  action:
+  - service: notify.notify
+    data:
+      title: Alarm
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1
+      message: Er is beweging gedetecteerd in huis!
+  mode: single

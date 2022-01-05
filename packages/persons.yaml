@@ -1,0 +1,7 @@
+group:
+  family:
+    entities:
+      - person.tom
+      - person.sara
+      - person.ilyas
+      - person.soraya
