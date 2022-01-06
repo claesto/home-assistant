@@ -186,6 +186,8 @@
   condition: []
   action:
   - service: alarm_control_panel.alarm_arm_away
+    target:
+      entity_id: alarm_control_panel.alarm
   mode: single
 - id: '1641406355882'
   alias: Trigger alarm on motion detected when alarm is armed
@@ -223,4 +225,18 @@
             critical: 1
             volume: 1
       message: Er is beweging gedetecteerd in huis!
+  mode: single
+- id: '1641459697562'
+  alias: Shut down alarm when the family is home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.family
+    from: not_home
+    to: home
+  condition: []
+  action:
+  - service: alarm_control_panel.alarm_disarm
+    target:
+      entity_id: alarm_control_panel.alarm
   mode: single
