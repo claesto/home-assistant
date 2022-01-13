@@ -92,11 +92,11 @@
   alias: Garbage collection notifications
   description: ''
   trigger:
-  - platform: state
-    entity_id: sensor.recycleapp_morgen
+  - platform: time
+    at: '20:30'
   condition:
   - condition: template
-    value_template: '{{ states.sensor.recycleapp_morgen.state != ''Geen'' }}'
+    value_template: '{{ states.sensor.recycleapp_morgen.state != "Geen" }}'
   action:
   - service: notify.mobile_app_iphone_8_tom
     data:
