@@ -240,3 +240,21 @@
     target:
       entity_id: alarm_control_panel.alarm
   mode: single
+- id: '1642971842503'
+  alias: verlichting - slaapkamer - aan - fade-in op weekends / niet-werkdagen
+  description: ''
+  trigger:
+  - platform: time
+    at: input_datetime.wake_up_time_weekend
+  condition:
+  - condition: state
+    entity_id: input_boolean.wake_up_light
+    state: 'on'
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'off'
+  action:
+  - service: script.turn_on
+    target:
+      entity_id: script.fade_in_slaapkamerverlichting
+  mode: single
