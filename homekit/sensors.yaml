@@ -6,3 +6,4 @@
 - sensor.aqara_living_room_humidity
 - sensor.aqara_master_bedroom_humidity
 - sensor.aqara_office_humidity
+- binary_sensor.tom_in_meeting
