@@ -1,5 +1,0 @@
-- platform: scrape
-  resource: https://www.meteo.be/nl/kontich
-  select: "span.warning-detail__inner__uv__text"
-  name: "KMI UV"
-  scan_interval: 300
