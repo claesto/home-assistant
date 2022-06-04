@@ -64,7 +64,12 @@
     entity_id: binary_sensor.meteoalarm
     from: 'off'
   action:
-  - service: notify.notify
+  - service: notify.mobile_app_iphone_van_sara
+    data:
+      title: '{{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
+      message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} vanaf
+        {{state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
+  - service: notify.mobile_app_iphone_van_tom
     data:
       title: '{{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
       message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} vanaf
@@ -99,6 +104,10 @@
     value_template: '{{ states.sensor.recycleapp_morgen.state != "Geen" }}'
   action:
   - service: notify.mobile_app_iphone_8_tom
+    data:
+      title: ♻️ Afvalophaling
+      message: Morgen ophaling van {{ states.sensor.recycleapp_morgen.state }}
+  - service: notify.mobile_app_iphone_van_sara
     data:
       title: ♻️ Afvalophaling
       message: Morgen ophaling van {{ states.sensor.recycleapp_morgen.state }}
