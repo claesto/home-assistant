@@ -34,6 +34,8 @@ home-assistant_v2.db
 
 ip_bans.yaml
 zigbee.db
+
+.HA_VERSION
 # Editors
 .vscode
 .idea
