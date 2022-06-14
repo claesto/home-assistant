@@ -1,0 +1,21 @@
+rest:
+  - resource: https://www.meteo.be/services/wow/ajax/getLatestObservation.php?id=eb83b402-87d8-e911-b3b9-0003ff59a783
+    scan_interval: 60
+    sensor:
+      - name: "vlinder_data_temperature"
+        value_template: '{{ value_json["primary"]["dt"] }}'
+        unit_of_measurement: '°C'
+      - name: "vlinder_data_wind_speed"
+        value_template: '{{ value_json["primary"]["dws"] }}'
+        unit_of_measurement: 'km/h'
+      - name: "vlinder_data_wind_direction"
+        value_template: '{{ value_json["primary"]["dwd"] }}'
+      - name: "vlinder_data_humidity"
+        value_template: '{{ value_json["primary"]["dh"] }}'
+        unit_of_measurement: '%'
+      - name: "vlinder_data_pressure"
+        value_template: '{{ value_json["primary"]["dm"] }}'
+        unit_of_measurement: 'hPa'
+      - name: "vlinder_data_rainfall"
+        value_template: '{{ value_json["primary"]["drr"] }}'
+        unit_of_measurement: 'mm/h'

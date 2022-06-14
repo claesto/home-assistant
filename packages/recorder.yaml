@@ -26,3 +26,6 @@ recorder:
       - sensor.2_shelly_em_channel_2_energy
       - sensor.2_shelly_em_channel_2_energy_returned
       - sensor.hue_motion_sensor_office_tom_temperature
+      - sensor.vlinder_data_humidity
+      - sensor.vlinder_data_rainfall
+      - sensor.vlinder_data_temperature
