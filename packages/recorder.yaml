@@ -9,14 +9,6 @@ recorder:
       - switch
 
     entities:
-      - sensor.aqara_bathroom_humidity
-      - sensor.aqara_bathroom_temperature
-      - sensor.aqara_living_room_humidity
-      - sensor.aqara_living_room_temperature
-      - sensor.aqara_master_bedroom_humidity
-      - sensor.aqara_master_bedroom_temperature
-      - sensor.aqara_office_humidity
-      - sensor.aqara_office_temperature
       - sensor.aqara_serverrack_humidity
       - sensor.aqara_serverrack_temperature
       - sensor.2_shelly_em_channel_1_power
@@ -29,3 +21,7 @@ recorder:
       - sensor.vlinder_data_humidity
       - sensor.vlinder_data_rainfall
       - sensor.vlinder_data_temperature
+      - sensor.vlinder_data_wind_speed
+      - sensor.hue_motion_sensor_living_temperature
+      - sensor.hue_motion_sensor_zolder_temperature
+      - sensor.hue_motion_sensor_berging_temperature
