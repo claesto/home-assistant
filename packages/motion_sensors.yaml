@@ -4,3 +4,5 @@ group:
       - binary_sensor.hue_motion_sensor_berging
       - binary_sensor.hue_motion_sensor_2_motion
       - binary_sensor.hue_motion_sensor_office_tom
+      - binary_sensor.hue_motion_sensor_living_motion
+      - binary_sensor.hue_motion_sensor_zolder

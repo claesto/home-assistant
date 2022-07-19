@@ -47,6 +47,7 @@ zigbee.db
 ._*
 .Spotlight-V100
 .Trashes
+.Trash*
 ehthumbs.db
 Thumbs.db
 desktop.ini
