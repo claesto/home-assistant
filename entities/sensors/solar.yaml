@@ -1,4 +1,0 @@
-# sensor:
-#   - platform: pvoutput
-#     system_id: 83611
-#     api_key: 18791b92b60796471b

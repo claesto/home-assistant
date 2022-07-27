@@ -2,6 +2,6 @@ binary_sensor:
   - name: "Tom in meeting"
     unique_id: "5b7d7828-8793-46ab-96c3-9436567d12bf"
     state: >
-      {{ is_state('device_tracker.mbpro', 'home') 
+      {{ is_state('device_tracker.mbpro_4', 'home') 
          and (is_state('binary_sensor.mbpro_camera_in_use', 'on')
          or is_state('binary_sensor.mbpro_audio_input_in_use', 'on')) }}
