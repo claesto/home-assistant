@@ -3,3 +3,47 @@ binary_sensor:
     country: "belgium"
     province: "Antwerp"
     language: "nl-BE"
+
+template:
+  sensor:
+    - name: Weather conditions Dutch
+      state: >-
+        {%- set state = states('weather.keizershoek') -%}
+        {% if state == 'clear-night' %} Helder, nacht
+        {% elif state == 'cloudy' %} Bewolkt
+        {% elif state == 'exceptional' %} Uitzonderlijk
+        {% elif state == 'fog' %} Mist
+        {% elif state == 'hail' %} Hagel
+        {% elif state == 'lightning' %} Bliksem
+        {% elif state == 'lightning-rainy' %} Bliksem, regenachtig
+        {% elif state == 'partlycloudy' %} Gedeeltelijk bewolkt
+        {% elif state == 'pouring' %} Gietende regen
+        {% elif state == 'rainy' %} Regenachtig
+        {% elif state == 'snowy' %} Sneeuwachtig
+        {% elif state == 'snowy-rainy' %} Sneeuw-, regenachtig
+        {% elif state == 'sunny' %} Zonnig
+        {% elif state == 'windy' %} Winderig
+        {% elif state == 'windy-variant' %} Winderig
+        {% else %} Geen voorspelling
+        {% endif %}
+
+    - name: Weather predicted conditions Dutch
+      state: >-
+          {%- set state = states('input_text.weather_forecast') -%}
+          {% if state == 'clear-night' %} Helder, nacht
+          {% elif state == 'cloudy' %} Bewolkt
+          {% elif state == 'exceptional' %} Uitzonderlijk
+          {% elif state == 'fog' %} Mist
+          {% elif state == 'hail' %} Hagel
+          {% elif state == 'lightning' %} Bliksem
+          {% elif state == 'lightning-rainy' %} Bliksem, regenachtig
+          {% elif state == 'partlycloudy' %} Gedeeltelijk bewolkt
+          {% elif state == 'pouring' %} Gietende regen
+          {% elif state == 'rainy' %} Regenachtig
+          {% elif state == 'snowy' %} Sneeuwachtig
+          {% elif state == 'snowy-rainy' %} Sneeuw-, regenachtig
+          {% elif state == 'sunny' %} Zonnig
+          {% elif state == 'windy' %} Winderig
+          {% elif state == 'windy-variant' %} Winderig
+          {% else %} Geen voorspelling
+          {% endif %}

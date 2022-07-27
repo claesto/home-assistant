@@ -69,7 +69,7 @@
       title: '{{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
       message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} vanaf
         {{state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
-  - service: notify.mobile_app_iphone_van_tom
+  - service: notify.mobile_app_iphone_van_tom2
     data:
       title: '{{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
       message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} vanaf
@@ -266,4 +266,111 @@
   - service: script.turn_on
     target:
       entity_id: script.fade_in_slaapkamerverlichting
+  mode: single
+- id: '1658337291271'
+  alias: Work - start work countdown timer
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.tom
+    zone: zone.work_tom
+    event: enter
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: timer.workday_countdown
+      state: idle
+  action:
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - service: timer.start
+    data: {}
+    target:
+      entity_id: timer.workday_countdown
+  mode: single
+- id: '1658342401317'
+  alias: Work - end of day notification
+  description: ''
+  trigger:
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.workday_countdown
+  condition: []
+  action:
+  - service: notify.mobile_app_iphone_van_tom2
+    data:
+      title: Werkdag einde
+      message: Tijd om te vertrekken. Reistijd is {{ states('sensor.reistijd_naar_huis')
+        }} {{ state_attr('sensor.reistijd_naar_huis', 'unit_of_measurement') }}
+  mode: single
+- id: '1658485901080'
+  alias: Save weather forecast next day
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  action:
+  - service: input_text.set_value
+    data:
+      value: '{{ state_attr(''weather.keizershoek'', ''forecast'')[0].condition }}'
+    target:
+      entity_id: input_text.weather_forecast
+  - service: input_number.set_value
+    data:
+      value: '{{ state_attr(''weather.keizershoek'', ''forecast'')[0].templow | float
+        }}'
+    target:
+      entity_id: input_number.weather_forecast_low_temperature
+  - service: input_number.set_value
+    data:
+      value: '{{ state_attr(''weather.keizershoek'', ''forecast'')[0].temperature
+        | float }}'
+    target:
+      entity_id: input_number.weather_forecast_temperature
+  - service: input_number.set_value
+    data:
+      value: '{{ state_attr(''weather.keizershoek'', ''forecast'')[0].precipitation
+        | float }}'
+    target:
+      entity_id: input_number.weather_forecast_precip
+  mode: single
+- id: '1658486506108'
+  alias: Workday - Morning message
+  description: ''
+  trigger:
+  - platform: time
+    at: 07:00:00
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.vacation
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+  action:
+  - service: notify.mobile_app_iphone_van_tom2
+    data:
+      title: Goeiemorgen
+      message: 'Goeiemorgen, het is nu {{ states(''sensor.weather_conditions_dutch'')
+        }} en {{ state_attr(''weather.keizershoek'', ''temperature'') }}°C. Reistijd
+        naar kantoor is {{ states(''sensor.reistijd_naar_werk'') }} {{ state_attr(''sensor.reistijd_naar_werk'',
+        ''unit_of_measurement'') }}.
+
+        Vandaag wordt het {{ states(''sensor.weather_predicted_conditions_dutch'')
+        }} met temperaturen tussen {{ states(''input_number.weather_forecast_low_temperature'')
+        | round(0) | trim }}°C en {{ states(''input_number.weather_forecast_temperature'')
+        | round(0) | trim }}°C met {{ states(''input_number.weather_forecast_precip'')
+        | trim }}mm neerslag.
+
+        '
   mode: single
