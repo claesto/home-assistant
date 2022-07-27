@@ -1,0 +1,9 @@
+sensor:
+  - name: Power consumption
+    unit_of_measurement: "kWh"
+    unique_id: "f3716bfb-5c69-4492-961d-d3fd8a883755"
+    state: > 
+      {% set pv_generated = states('sensor.2_shelly_em_channel_2_energy') | float %}
+      {% set energy       = states('sensor.2_shelly_em_channel_1_energy') | float %}
+    
+      {{ (pv_generated - energy) | round(1, default=0) | abs }}
