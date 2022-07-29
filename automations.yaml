@@ -290,10 +290,22 @@
       minutes: 5
       seconds: 0
       milliseconds: 0
-  - service: timer.start
-    data: {}
-    target:
-      entity_id: timer.workday_countdown
+  - choose:
+    - conditions:
+      - condition: time
+        weekday:
+        - fri
+      sequence:
+      - service: timer.start
+        data:
+          duration: 07:00:00
+        target:
+          entity_id: timer.workday_countdown
+    default:
+    - service: timer.start
+      data: {}
+      target:
+        entity_id: timer.workday_countdown
   mode: single
 - id: '1658342401317'
   alias: Work - end of day notification
