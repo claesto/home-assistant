@@ -103,7 +103,7 @@
   - condition: template
     value_template: '{{ states.sensor.recycleapp_morgen.state != "Geen" }}'
   action:
-  - service: notify.mobile_app_iphone_8_tom
+  - service: notify.mobile_app_iphone_van_tom2
     data:
       title: ♻️ Afvalophaling
       message: Morgen ophaling van {{ states.sensor.recycleapp_morgen.state }}
@@ -212,8 +212,7 @@
     state: armed_away
   action:
   - service: alarm_control_panel.alarm_trigger
-    target:
-      entity_id: alarm_control_panel.home_alarm
+    data: {}
   mode: single
 - id: '1641407101821'
   alias: Send notification when alarm is triggered
@@ -303,7 +302,8 @@
           entity_id: timer.workday_countdown
     default:
     - service: timer.start
-      data: {}
+      data:
+        duration: 08:00:00
       target:
         entity_id: timer.workday_countdown
   mode: single
