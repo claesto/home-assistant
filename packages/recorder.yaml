@@ -9,8 +9,6 @@ recorder:
       - switch
 
     entities:
-      - sensor.aqara_serverrack_humidity
-      - sensor.aqara_serverrack_temperature
       - sensor.2_shelly_em_channel_1_power
       - sensor.2_shelly_em_channel_1_energy
       - sensor.2_shelly_em_channel_1_energy_returned
@@ -22,6 +20,6 @@ recorder:
       - sensor.vlinder_data_rainfall
       - sensor.vlinder_data_temperature
       - sensor.vlinder_data_wind_speed
-      - sensor.hue_motion_sensor_living_temperature
+      - sensor.hue_motion_sensor_5_temperature
       - sensor.hue_motion_sensor_zolder_temperature
       - sensor.hue_motion_sensor_berging_temperature
