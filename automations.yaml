@@ -5,12 +5,12 @@
   use_blueprint:
     path: homeassistant/motion_light.yaml
     input:
-      motion_entity: binary_sensor.hue_motion_sensor_berging
       light_target:
         entity_id: light.lamp_berging
       no_motion_wait: 20
       motion_entity_lux: 60
-      motion_entity_lux_meter: sensor.hue_motion_sensor_berging_light_level
+      motion_entity_lux_meter: sensor.hue_motion_sensor_1_illuminance
+      motion_entity: binary_sensor.hue_motion_sensor_1_motion
 - id: '1625850309627'
   alias: verlichting - voorgevel - aan - 20 minuten na zonsondergang
   description: ''
