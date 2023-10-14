@@ -15,11 +15,14 @@ recorder:
       - sensor.2_shelly_em_channel_2_power
       - sensor.2_shelly_em_channel_2_energy
       - sensor.2_shelly_em_channel_2_energy_returned
-      - sensor.hue_motion_sensor_office_tom_temperature
       - sensor.vlinder_data_humidity
       - sensor.vlinder_data_rainfall
       - sensor.vlinder_data_temperature
       - sensor.vlinder_data_wind_speed
+      - sensor.hue_motion_sensor_1_temperature
+      - sensor.hue_motion_sensor_2_temperature
+      - sensor.hue_motion_sensor_3_temperature
+      - sensor.hue_motion_sensor_4_temperature
       - sensor.hue_motion_sensor_5_temperature
-      - sensor.hue_motion_sensor_zolder_temperature
-      - sensor.hue_motion_sensor_berging_temperature
+      - sensor.bureau
+      - sensor.woonkamer

@@ -1,5 +1,5 @@
 rest:
-  resource: https://www.meteo.be/services/wow/ajax/getLatestObservation.php?id=eb83b402-87d8-e911-b3b9-0003ff59a783
+  resource: https://wow.meteo.be/services/wow/ajax/getLatestObservation.php?id=23f30a34-269b-e911-80e7-0003ff59889d
   scan_interval: 60
   sensor:
     - name: "vlinder_data_temperature"

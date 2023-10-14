@@ -1,8 +1,8 @@
 group:
   motion_sensors:
     entities:
-      - binary_sensor.hue_motion_sensor_berging
+      - binary_sensor.hue_motion_sensor_1_motion
       - binary_sensor.hue_motion_sensor_2_motion
-      - binary_sensor.hue_motion_sensor_office_tom
-      - binary_sensor.hue_motion_sensor_living_motion
-      - binary_sensor.hue_motion_sensor_zolder
+      - binary_sensor.hue_motion_sensor_3_motion
+      - binary_sensor.hue_motion_sensor_4_motion
+      - binary_sensor.hue_motion_sensor_5_motion
