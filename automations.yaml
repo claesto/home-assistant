@@ -70,7 +70,7 @@
       title: '{{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
       message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} vanaf
         {{state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
-  - service: notify.mobile_app_iphone_van_tom2
+  - service: notify.mobile_app_iphone_van_tom
     data:
       title: '{{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
       message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} vanaf
@@ -104,7 +104,7 @@
   - condition: template
     value_template: '{{ states.sensor.recycleapp_morgen.state != "Geen" }}'
   action:
-  - service: notify.mobile_app_iphone_van_tom2
+  - service: notify.mobile_app_iphone_van_tom
     data:
       title: ♻️ Afvalophaling
       message: Morgen ophaling van {{ states.sensor.recycleapp_morgen.state }}
@@ -214,6 +214,8 @@
   action:
   - service: alarm_control_panel.alarm_trigger
     data: {}
+    target:
+      entity_id: alarm_control_panel.alarm
   mode: single
 - id: '1641407101821'
   alias: Send notification when alarm is triggered
@@ -318,7 +320,7 @@
       entity_id: timer.workday_countdown
   condition: []
   action:
-  - service: notify.mobile_app_iphone_van_tom2
+  - service: notify.mobile_app_iphone_van_tom
     data:
       title: Werkdag einde
       message: Tijd om te vertrekken. Reistijd is {{ states('sensor.reistijd_naar_huis')
@@ -371,7 +373,7 @@
       entity_id: binary_sensor.workday_sensor
       state: 'on'
   action:
-  - service: notify.mobile_app_iphone_van_tom2
+  - service: notify.mobile_app_iphone_van_tom
     data:
       title: Goeiemorgen
       message: 'Goeiemorgen, het is nu {{ states(''sensor.weather_conditions_dutch'')
@@ -386,4 +388,17 @@
         | trim }}mm neerslag.
 
         '
+  mode: single
+- id: '1682009182943'
+  alias: verlichting_staanlamp_uit_middernacht
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:45:00'
+  condition: []
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.stopcontact_woonkamer_rechts
   mode: single
