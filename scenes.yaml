@@ -152,11 +152,6 @@
       friendly_name: Stopcontact Woonkamer rechts
       state: 'off'
     light.nachtlamp:
-      supported_color_modes:
-      - color_temp
-      icon: mdi:lightbulb-group
-      friendly_name: Nachtlamp
-      supported_features: 44
       min_color_temp_kelvin: 2202
       max_color_temp_kelvin: 6535
       min_mireds: 153
@@ -164,9 +159,14 @@
       effect_list:
       - None
       - candle
+      supported_color_modes:
+      - color_temp
       entity_id:
       - light.nachtlamp_sara
       - light.nachtlamp_tom
+      icon: mdi:lightbulb-group
+      friendly_name: Nachtlamp
+      supported_features: 44
       state: 'off'
     light.ilyas:
       min_color_temp_kelvin: 2000
@@ -178,33 +178,33 @@
       - xy
       is_hue_group: true
       hue_scenes:
-      - Champions league
-      - Ibiza
-      - Bloedmaan
-      - Arctische dageraad
-      - Motown
-      - Kristallijn
-      - Maanlicht
-      - Lezen
-      - Concentreren
-      - Midzomerzon
-      - Gedimd
-      - Helder
-      - Kleur explosie
       - Tortelduifjes
-      - Onder de boom
-      - F1
-      - Nachtlampje
-      - Tokio
-      - Gamer
-      - Game
-      - Stad van de liefde
-      - meet the woo
       - Ontspannen
+      - Concentreren
+      - Game
+      - Arctische dageraad
+      - Kristallijn
+      - Tokio
+      - Gedimd
+      - Onder de boom
+      - Lezen
+      - F1
+      - Gamer
+      - Nachtlampje
+      - Helder
+      - Ibiza
+      - meet the woo
+      - Midzomerzon
+      - Kleur explosie
+      - Stad van de liefde
+      - Bloedmaan
+      - Champions league
+      - Motown
+      - Maanlicht
       hue_type: room
       lights:
-      - Ilyas spot 1
       - Ilyas spot 2
+      - Ilyas spot 1
       - Ilyas ceiling 1
       dynamics: false
       icon: mdi:lightbulb-group
@@ -221,26 +221,26 @@
       - xy
       is_hue_group: true
       hue_scenes:
-      - Concentreren
-      - "\U0001F499\U0001F49C"
-      - Bloedmaan
-      - Nachtlampje
-      - Blue
-      - Sterrenlicht
-      - Maanlicht
-      - Gedimd
-      - Helder
-      - Nevel
-      - Melkweg
-      - tiktok
-      - Energie
       - Arctische dageraad
       - bts
+      - Nachtlampje
+      - "\U0001F499\U0001F49C"
+      - Nevel
+      - Gedimd
+      - Helder
+      - Melkweg
+      - Blue
+      - Concentreren
+      - Sterrenlicht
+      - Bloedmaan
+      - tiktok
+      - Energie
+      - Maanlicht
       hue_type: room
       lights:
-      - Soraya spot 1
-      - Soraya ceiling 1
       - Soraya spot 2
+      - Soraya ceiling 1
+      - Soraya spot 1
       dynamics: false
       icon: mdi:lightbulb-group
       friendly_name: Soraya
@@ -251,6 +251,37 @@
       - brightness
       - onoff
       friendly_name: Lamp Master bedroom
+      supported_features: 0
+      state: 'off'
+    light.lamp_bureau_tom_actie:
+      supported_color_modes:
+      - brightness
+      - onoff
+      friendly_name: Lamp Bureau Tom actie
+      supported_features: 0
+      state: 'off'
+    light.lamp_zijtuin:
+      supported_color_modes:
+      - onoff
+      friendly_name: Lamp Zijtuin
+      supported_features: 0
+      state: 'off'
+    light.lamp_voorgevel:
+      supported_color_modes:
+      - onoff
+      friendly_name: Lamp Voorgevel
+      supported_features: 0
+      state: 'off'
+    light.lamp_toilet:
+      supported_color_modes:
+      - onoff
+      friendly_name: Lamp Toilet
+      supported_features: 0
+      state: 'off'
+    light.lamp_berging:
+      supported_color_modes:
+      - onoff
+      friendly_name: Lamp Berging
       supported_features: 0
       state: 'off'
   icon: mdi:lightbulb-off
@@ -264,4 +295,14 @@
     light.soraya:
       entity_only: true
     light.lamp_master_bedroom:
+      entity_only: true
+    light.lamp_bureau_tom_actie:
+      entity_only: true
+    light.lamp_zijtuin:
+      entity_only: true
+    light.lamp_voorgevel:
+      entity_only: true
+    light.lamp_toilet:
+      entity_only: true
+    light.lamp_berging:
       entity_only: true
