@@ -37,18 +37,16 @@
       state: 'on'
   icon: mdi:lightbulb-on
 - id: '1640612078011'
-  name: Master bedroom - all lights off
+  name: MBR - off
   entities:
-    light.master_bedroom_plafond:
-      supported_color_modes:
-      - brightness
-      icon: hue:ceiling-fugato-four
-      friendly_name: Plafondlamp
-      supported_features: 1
-      state: 'off'
     light.nachtlamp:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 6535
       min_mireds: 153
       max_mireds: 454
+      effect_list:
+      - None
+      - candle
       supported_color_modes:
       - color_temp
       entity_id:
@@ -56,5 +54,214 @@
       - light.nachtlamp_tom
       icon: mdi:lightbulb-group
       friendly_name: Nachtlamp
+      supported_features: 44
+      state: 'off'
+    light.lamp_master_bedroom:
+      supported_color_modes:
+      - brightness
+      - onoff
+      friendly_name: Lamp Master bedroom
+      supported_features: 0
+      state: 'off'
+  icon: mdi:track-light-off
+  metadata:
+    light.lamp_master_bedroom:
+      entity_only: true
+- id: '1698061520730'
+  name: MBR - nachtlamp aan
+  entities:
+    light.nachtlamp:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - None
+      - candle
+      supported_color_modes:
+      - color_temp
+      entity_id:
+      - light.nachtlamp_sara
+      - light.nachtlamp_tom
+      icon: mdi:lightbulb-group
+      friendly_name: Nachtlamp
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 2207
+      color_temp: 453
+      hs_color:
+      - 29.772
+      - 84.328
+      rgb_color:
+      - 255
+      - 146
+      - 39
+      xy_color:
+      - 0.579
+      - 0.388
+      effect: None
+      state: 'on'
+  icon: hue:go-portable-table
+  metadata:
+    light.nachtlamp:
+      entity_only: true
+- id: '1698061703740'
+  name: MBR - Plafond
+  entities:
+    light.lamp_master_bedroom:
+      supported_color_modes:
+      - brightness
+      - onoff
+      friendly_name: Lamp Master bedroom
+      supported_features: 0
+      color_mode: brightness
+      brightness: 153
+      state: 'on'
+  icon: mdi:ceiling-light
+  metadata:
+    light.lamp_master_bedroom:
+      entity_only: true
+- id: '1698493567319'
+  name: Vloerlamp aan
+  entities:
+    switch.stopcontact_woonkamer_rechts:
+      device_class: outlet
+      friendly_name: Stopcontact Woonkamer rechts
+      state: 'on'
+  icon: mdi:floor-lamp
+  metadata:
+    switch.stopcontact_woonkamer_rechts:
+      entity_only: true
+- id: '1698493595639'
+  name: Vloerlamp uit
+  entities:
+    switch.stopcontact_woonkamer_rechts:
+      device_class: outlet
+      friendly_name: Stopcontact Woonkamer rechts
+      state: 'off'
+  icon: hue:floor-shade-off
+  metadata:
+    switch.stopcontact_woonkamer_rechts:
+      entity_only: true
+- id: '1698493749717'
+  name: Alles uit
+  entities:
+    switch.stopcontact_woonkamer_rechts:
+      device_class: outlet
+      friendly_name: Stopcontact Woonkamer rechts
+      state: 'off'
+    light.nachtlamp:
+      supported_color_modes:
+      - color_temp
+      icon: mdi:lightbulb-group
+      friendly_name: Nachtlamp
+      supported_features: 44
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - None
+      - candle
+      entity_id:
+      - light.nachtlamp_sara
+      - light.nachtlamp_tom
+      state: 'off'
+    light.ilyas:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      is_hue_group: true
+      hue_scenes:
+      - Champions league
+      - Ibiza
+      - Bloedmaan
+      - Arctische dageraad
+      - Motown
+      - Kristallijn
+      - Maanlicht
+      - Lezen
+      - Concentreren
+      - Midzomerzon
+      - Gedimd
+      - Helder
+      - Kleur explosie
+      - Tortelduifjes
+      - Onder de boom
+      - F1
+      - Nachtlampje
+      - Tokio
+      - Gamer
+      - Game
+      - Stad van de liefde
+      - meet the woo
+      - Ontspannen
+      hue_type: room
+      lights:
+      - Ilyas spot 1
+      - Ilyas spot 2
+      - Ilyas ceiling 1
+      dynamics: false
+      icon: mdi:lightbulb-group
+      friendly_name: Ilyas
       supported_features: 40
       state: 'off'
+    light.soraya:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      - xy
+      is_hue_group: true
+      hue_scenes:
+      - Concentreren
+      - "\U0001F499\U0001F49C"
+      - Bloedmaan
+      - Nachtlampje
+      - Blue
+      - Sterrenlicht
+      - Maanlicht
+      - Gedimd
+      - Helder
+      - Nevel
+      - Melkweg
+      - tiktok
+      - Energie
+      - Arctische dageraad
+      - bts
+      hue_type: room
+      lights:
+      - Soraya spot 1
+      - Soraya ceiling 1
+      - Soraya spot 2
+      dynamics: false
+      icon: mdi:lightbulb-group
+      friendly_name: Soraya
+      supported_features: 40
+      state: 'off'
+    light.lamp_master_bedroom:
+      supported_color_modes:
+      - brightness
+      - onoff
+      friendly_name: Lamp Master bedroom
+      supported_features: 0
+      state: 'off'
+  icon: mdi:lightbulb-off
+  metadata:
+    switch.stopcontact_woonkamer_rechts:
+      entity_only: true
+    light.nachtlamp:
+      entity_only: true
+    light.ilyas:
+      entity_only: true
+    light.soraya:
+      entity_only: true
+    light.lamp_master_bedroom:
+      entity_only: true

@@ -28,13 +28,13 @@
     path: motion_light_lux_detection.yaml
     input:
       motion_entity_lux: 50
-      no_motion_wait: 120
+      no_motion_wait: 240
       motion_entity: binary_sensor.hue_motion_sensor_2_motion
       light_target:
         entity_id: light.lamp_toilet
-      motion_entity_lux_meter: sensor.hue_motion_sensor_2_light_level
+      motion_entity_lux_meter: sensor.hue_motion_sensor_2_illuminance
 - id: '1628975132600'
-  alias: verlichting - staanlamp - aan - zonsondergang
+  alias: verlichting - vloerlamp - aan - zonsondergang
   description: ''
   trigger:
   - platform: sun
@@ -270,7 +270,7 @@
       entity_id: script.fade_in_slaapkamerverlichting
   mode: single
 - id: '1658337291271'
-  alias: Work - start work countdown timer
+  alias: werk - timer - start werkdag timer
   description: ''
   trigger:
   - platform: zone
@@ -311,7 +311,7 @@
         entity_id: timer.workday_countdown
   mode: single
 - id: '1658342401317'
-  alias: Work - end of day notification
+  alias: werk - notificatie - einde werkdag
   description: ''
   trigger:
   - platform: event
@@ -327,7 +327,7 @@
         }} {{ state_attr('sensor.reistijd_naar_huis', 'unit_of_measurement') }}
   mode: single
 - id: '1658485901080'
-  alias: Save weather forecast next day
+  alias: weer - opslaan weersverwachting volgende dag
   description: ''
   trigger:
   - platform: time
@@ -358,7 +358,7 @@
       entity_id: input_number.weather_forecast_precip
   mode: single
 - id: '1658486506108'
-  alias: Workday - Morning message
+  alias: notificaties - ochtendbericht (werkdag)
   description: ''
   trigger:
   - platform: time
@@ -390,7 +390,7 @@
         '
   mode: single
 - id: '1682009182943'
-  alias: verlichting_staanlamp_uit_middernacht
+  alias: verlichting - vloerlamp - uit - 23:45
   description: ''
   trigger:
   - platform: time
@@ -401,4 +401,67 @@
     data: {}
     target:
       entity_id: switch.stopcontact_woonkamer_rechts
+  mode: single
+- id: '1698659084271'
+  alias: verlichting - vloerlamp - aan - lux < 2 & overdag
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.hue_motion_sensor_5_illuminance
+    below: 2
+  condition:
+  - condition: sun
+    before: sunset
+    after: sunrise
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.stopcontact_woonkamer_rechts
+  mode: single
+- id: '1698659161982'
+  alias: verlichting - vloerlamp - uit - lux > 4 & overdag
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.hue_motion_sensor_5_illuminance
+    above: 4
+  condition:
+  - condition: sun
+    before: sunset
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.stopcontact_woonkamer_rechts
+  mode: single
+- id: '1698662220340'
+  alias: notificaties - ochtendbericht
+  description: ''
+  trigger:
+  - platform: time
+    at: 08:00:00
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.vacation
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: ff
+  action:
+  - service: notify.mobile_app_iphone_van_tom
+    data:
+      title: Goeiemorgen
+      message: 'Goeiemorgen, het is nu {{ states(''sensor.weather_conditions_dutch'')
+        }} en {{ state_attr(''weather.keizershoek'', ''temperature'') }}°C.
+
+        Vandaag wordt het {{ states(''sensor.weather_predicted_conditions_dutch'')
+        }} met temperaturen tussen {{ states(''input_number.weather_forecast_low_temperature'')
+        | round(0) | trim }}°C en {{ states(''input_number.weather_forecast_temperature'')
+        | round(0) | trim }}°C met {{ states(''input_number.weather_forecast_precip'')
+        | trim }}mm neerslag.
+
+        '
   mode: single
