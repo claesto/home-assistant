@@ -19,6 +19,7 @@ recorder:
       - sensor.vlinder_data_rainfall
       - sensor.vlinder_data_temperature
       - sensor.vlinder_data_wind_speed
+      - sensor.buienradar_feel_temperature
       - sensor.hue_motion_sensor_1_temperature
       - sensor.hue_motion_sensor_2_temperature
       - sensor.hue_motion_sensor_3_temperature
