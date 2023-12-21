@@ -28,7 +28,7 @@
     path: motion_light_lux_detection.yaml
     input:
       motion_entity_lux: 50
-      no_motion_wait: 240
+      no_motion_wait: 30
       motion_entity: binary_sensor.hue_motion_sensor_2_motion
       light_target:
         entity_id: light.lamp_toilet
@@ -122,69 +122,6 @@
       time_entity: input_datetime.outside_lights_off_time
       light_target:
         area_id: buiten
-- id: '1641284191881'
-  alias: Lighting - presence simulation - lights toggle
-  description: ''
-  trigger:
-  - platform: time_pattern
-    minutes: /15
-  condition:
-  - condition: sun
-    after: sunset
-  - condition: state
-    entity_id: input_boolean.vacation
-    state: 'on'
-  - condition: time
-    before: '23:15'
-  action:
-  - delay: 00:{{ '{:02}'.format(range(0, 30) | random | int) }}:00
-  - service: homeassistant.toggle
-    target:
-      entity_id: '{{ state_attr(''light.presence_simulation'',''entity_id'') | random
-        }}'
-  mode: single
-- id: '1641285136900'
-  alias: Lighting - presence simulation - lights off
-  description: ''
-  trigger:
-  - platform: time
-    at: input_datetime.end_time_presence_simulation
-  condition:
-  - condition: state
-    entity_id: input_boolean.vacation
-    state: 'on'
-  action:
-  - service: homeassistant.turn_off
-    target:
-      entity_id:
-      - light.presence_simulation
-      - switch.stopcontact_woonkamer_rechts
-  mode: single
-- id: '1641286153723'
-  alias: Lighting presence simulation bedroom lights
-  description: ''
-  trigger:
-  - platform: time
-    at: input_datetime.end_time_presence_simulation
-  condition:
-  - condition: state
-    entity_id: input_boolean.vacation
-    state: 'on'
-  action:
-  - service: light.turn_on
-    target:
-      entity_id: light.master_bedroom_plafond
-    data:
-      brightness_pct: 20
-  - delay:
-      hours: 0
-      minutes: 2
-      seconds: 0
-      milliseconds: 0
-  - service: light.turn_off
-    target:
-      entity_id: light.master_bedroom_plafond
-  mode: single
 - id: '1641406072469'
   alias: Arm alarm if nobody is home
   description: ''
@@ -204,7 +141,8 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: group.motion_sensors
+    entity_id:
+    - binary_sensor.bewegingsmelders
     from: 'off'
     to: 'on'
   condition:
@@ -464,4 +402,31 @@
         | trim }}mm neerslag.
 
         '
+  mode: single
+- id: '1699120321203'
+  alias: Tag - Toiletpapier is gescand
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: a12f63bc-ed7e-4a7a-b360-888742507810
+  - platform: event
+    event_type: tagscantoiletpapier
+  condition: []
+  action:
+  - service: shopping_list.add_item
+    data:
+      name: Toiletpapier
+  mode: single
+- id: '1699881656417'
+  alias: Tag - door tag is scanned
+  description: ''
+  trigger:
+  - platform: event
+    event_type: tagscandoor
+  condition: []
+  action:
+  - service: '{% if is_state("alarm_control_panel.alarm", "disarmed") %} script.leaving_house
+      {% else %} script.coming_home {% endif %}
+
+      '
   mode: single
