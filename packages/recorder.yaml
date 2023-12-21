@@ -1,6 +1,6 @@
 recorder:
   db_url: !secret recorder_db_url
-  purge_keep_days: 3
+  purge_keep_days: 10
 
   include:
     domains:
@@ -20,6 +20,7 @@ recorder:
       - sensor.vlinder_data_temperature
       - sensor.vlinder_data_wind_speed
       - sensor.buienradar_feel_temperature
+      - sensor.buienradar_wind_gust
       - sensor.hue_motion_sensor_1_temperature
       - sensor.hue_motion_sensor_2_temperature
       - sensor.hue_motion_sensor_3_temperature
