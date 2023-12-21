@@ -14,3 +14,25 @@ fade_in_slaapkamerverlichting:
       entity_id: light.nachtlamp
   mode: single
   icon: mdi:lamps
+leaving_house:
+  alias: Leaving house
+  sequence:
+  - service: alarm_control_panel.alarm_arm_away
+    data: {}
+    target:
+      entity_id: alarm_control_panel.alarm
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.alles_uit
+  mode: single
+  icon: mdi:alarm-light-outline
+coming_home:
+  alias: Coming home
+  sequence:
+  - service: alarm_control_panel.alarm_disarm
+    data: {}
+    target:
+      entity_id: alarm_control_panel.alarm
+  mode: single
+  icon: mdi:alarm-light-off-outline
