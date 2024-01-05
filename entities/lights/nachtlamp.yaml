@@ -1,5 +1,0 @@
-platform: group
-name: Nachtlamp
-entities:
-  - light.nachtlamp_sara
-  - light.nachtlamp_tom

@@ -1,4 +1,0 @@
-# list of items exposed to Homekit/Siri
-# home assistant specific / automation-related booleans and switches
-- input_boolean.vacation
-- input_boolean.party
