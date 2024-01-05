@@ -1,0 +1,40 @@
+# Alarm
+
+automation:
+  # trigger alarm when motion is detected and the alarm is armed
+  - alias: 'alarm - trigger alarm on motion and armed state'
+    id: alarm_trigger_armed_motion
+    trigger:
+      - platform: state
+        entity_id: 
+          - binary_sensor.motion_sensors
+        from: 'off'
+        to: 'on'
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.alarm
+        state: armed_away
+    action:
+      - service: alarm_control_panel.alarm_trigger
+        data: {}
+        target:
+          entity_id: alarm_control_panel.alarm
+
+  # send notification when alarm is triggered
+  - alias: 'alarm - send notification when alarm is triggered'
+    id: alarm_notification_triggered_alarm
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.alarm
+        to: triggered
+    action:
+      - service: notify.parents_phone_app
+        data:
+          title: Alarm!
+          data:
+            push:
+              sound:
+                name: default
+                critical: 1
+                volume: 1
+          message: 'Beweging gedetecteerd in huis!'

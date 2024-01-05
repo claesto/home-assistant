@@ -1,0 +1,32 @@
+---
+# Recorder
+# https://www.home-assistant.io/integrations/recorder/
+
+recorder:
+  db_url: !secret recorder_db_url
+  purge_keep_days: 10
+
+  include:
+    domains:
+      - light
+      - media_player
+      - switch
+
+    entities:
+      - sensor.2_shelly_em_channel_1_power
+      - sensor.2_shelly_em_channel_1_energy
+      - sensor.2_shelly_em_channel_1_energy_returned
+      - sensor.2_shelly_em_channel_2_power
+      - sensor.2_shelly_em_channel_2_energy
+      - sensor.2_shelly_em_channel_2_energy_returned
+      - sensor.vlinder_data_humidity
+      - sensor.vlinder_data_rainfall
+      - sensor.vlinder_data_temperature
+      - sensor.vlinder_data_wind_speed
+      - sensor.buienradar_feel_temperature
+      - sensor.buienradar_wind_gust
+      - sensor.hue_motion_sensor_1_temperature
+      - sensor.hue_motion_sensor_2_temperature
+      - sensor.hue_motion_sensor_3_temperature
+      - sensor.hue_motion_sensor_4_temperature
+      - sensor.hue_motion_sensor_5_temperature

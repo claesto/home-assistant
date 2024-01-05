@@ -1,0 +1,60 @@
+---
+# Living room
+
+automation:
+  # turn on the living room floor lamp at sunset
+  - alias: 'lighting - living room - turn on floor lamp at sunset'
+    id: area_living_room_lighting_turn_on_floorlamp_sunset
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '-00:05:00'
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.stopcontact_woonkamer_rechts
+
+  # turn off the living room floor lamp at 23:45, in case we forget
+  - alias: 'lighting - living room - turn off floor lamp at 23:45'
+    id: area_living_room_lighting_turn_off_floorlamp_midnight
+    trigger:
+      - platform: time
+        at: '23:45:00'
+    action:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.stopcontact_woonkamer_rechts
+
+  # turn on the living room floor lamp when someone is home and lux < 2 during the day
+  - alias: 'lighting - living room - turn on floor lamp low lux and at home'
+    id: area_living_room_lighting_turn_on_floorlamp_low_lux_at_home
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.hue_motion_sensor_5_illuminance
+        below: 2
+    condition:
+        - condition: sun
+          before: sunset
+          after: sunrise
+        - condition: state
+          entity_id: group.family
+          state: 'home'
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.stopcontact_woonkamer_rechts
+
+  # turn ff the living room floor lamp when someone is home and lux > 4 during the day
+  - alias: 'lighting - living room - turn off floor lamp lux above 4 during day'
+    id: area_living_room_lighting_turn_off_floorlamp_lux_above_4_daytime
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.hue_motion_sensor_5_illuminance
+        above: 4
+    condition:
+      - condition: sun
+        before: sunset
+    action:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.stopcontact_woonkamer_rechts

@@ -1,0 +1,25 @@
+---
+# Outside
+
+automation:
+  # turn on the outdoor lights 20 minutes after sunset
+  - alias: 'lighting - outdoor - turn on lights at sunset'
+    id: outdoor_lighting_turn_on_sunset
+    use_blueprint:
+      path: lights_on_sunset.yaml
+      input:
+        light_target: 
+          entity_id:
+            - light.outside_lights
+        offset_time: '00:20:00'
+
+  # turn off the outdoor lights after 23:30
+  - alias: 'lighting - outdoor - turn off lights at 23:30'
+    id: outdoor_lighting_turn_off_midnight
+    trigger:
+      - platform: time
+        at: '23:30:00'
+    action:
+      - service: light.turn_off
+        target:
+          entity_id: light.outside_lights

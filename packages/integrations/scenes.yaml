@@ -1,0 +1,6 @@
+---
+# Scenes
+# https://www.home-assistant.io/integrations/scene/
+
+# include scenes created in the UI
+scene: !include ../../scenes.yaml

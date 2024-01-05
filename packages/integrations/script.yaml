@@ -1,0 +1,6 @@
+---
+# Scripts
+# https://www.home-assistant.io/docs/scripts/
+
+# include script created in the UI
+script: !include ../../scripts.yaml

@@ -1,0 +1,22 @@
+---
+# Security
+
+# alarm
+alarm_control_panel:
+  - platform: manual
+    name: Alarm
+    delay_time: 5
+    arming_time: 5
+
+# groups
+binary_sensor:
+  - platform: group
+    name: 'Motion sensors'
+    entities:
+      - binary_sensor.hue_motion_sensor_1_motion
+      - binary_sensor.hue_motion_sensor_2_motion
+      - binary_sensor.hue_motion_sensor_3_motion
+      - binary_sensor.hue_motion_sensor_4_motion
+      - binary_sensor.hue_motion_sensor_5_motion
+
+# TODO: door/window sensors

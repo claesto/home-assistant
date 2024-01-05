@@ -1,0 +1,39 @@
+---
+# Lights
+
+light:
+  - platform: group
+    name: HUE Ilyas
+    entities:
+      - light.hue_centris_ceiling_1_2
+      - light.hue_centris_spot_1_2
+      - light.hue_centris_spot_2_2
+
+  - platform: group
+    name: HUE Soraya
+    entities:
+      - light.hue_centris_ceiling_1
+      - light.hue_centris_spot_1
+      - light.hue_centris_spot_2
+
+  - platform: group
+    name: Nachtlamp
+    entities:
+      - light.nachtlamp_sara
+      - light.nachtlamp_tom
+
+  - platform: group
+    name: Presence simulation
+    entities:
+      - light.hue_ilyas
+      - light.hue_soraya
+      - light.lamp_berging
+      - light.lamp_bureau_tom_plafond
+      - light.lamp_toilet
+      - light.nachtlamp
+
+  - platform: group
+    name: Outside lights
+    entities:
+      - light.lamp_voorgevel
+      - light.lamp_zijtuin

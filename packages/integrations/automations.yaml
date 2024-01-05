@@ -1,0 +1,6 @@
+---
+# Automations
+# https://www.home-assistant.io/docs/automation/
+
+# include automations created in the UI
+automation: !include ../../automations.yaml

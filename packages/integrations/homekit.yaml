@@ -1,0 +1,95 @@
+---
+# HomeKit Bridge
+# https://www.home-assistant.io/integrations/homekit/
+
+# integration
+homekit:
+  name: Home Assistant
+  filter:
+    include_entity_globs:
+      - binary_sensor.hue_motion_sensor_*_motion
+    include_entities:
+      - alarm_control_panel.home
+      - light.ilyas
+      - light.lamp_berging
+      - light.lamp_bureau_tom_actie
+      - light.lamp_master_bedroom
+      - light.lamp_toilet
+      - light.lamp_voorgevel
+      - light.lamp_zijtuin
+      - light.nachtlamp
+      - light.soraya
+      - input_boolean.party
+      - input_boolean.vacation
+      - media_player.bureau_tom
+      - media_player.marantz_av7701
+      - switch.stopcontact_woonkamer_rechts
+      - sensor.hue_motion_sensor_3_temperature
+      - sensor.hue_motion_sensor_4_temperature
+      - sensor.hue_motion_sensor_5_temperature
+
+  # customization
+  entity_config:
+    alarm_control_panel.home:
+      name: Alarm
+    light.ilyas:
+      name: Ilyas
+    light.lamp_berging:
+      name: Berging
+    light.lamp_bureau_tom_actie:
+      name: Bureau
+    light.lamp_master_bedroom:
+      name: Master slaapkamer
+    light.lamp_toilet:
+      name: Toilet
+    light.lamp_voorgevel:
+      name: Voorgevel
+    light.lamp_zijtuin:
+      name: Zijtuin
+    light.nachtlamp:
+      name: Nachtlamp
+    light.soraya:
+      name: Soraya
+    input_boolean.party:
+      name: Party
+    input_boolean.vacation:
+      name: Vakantie
+    media_player.bureau_tom:
+      name: Sonos bureau
+      feature_list:
+        - feature: on_off
+        - feature: toggle_mute
+    media_player.marantz_av7701:
+      name: Marantz
+      feature_list:
+        - feature: on_off
+        - feature: toggle_mute
+    switch.stopcontact_woonkamer_rechts:
+      name: Vloerlamp
+    sensor.hue_motion_sensor_3_temperature:
+      name: Eerste verdieping
+    sensor.hue_motion_sensor_4_temperature:
+      name: Bovenverdieping
+    sensor.hue_motion_sensor_5_temperature:
+      name: Leefruimte
+    binary_sensor.hue_motion_sensor_1_motion:
+      name: Berging
+    binary_sensor.hue_motion_sensor_2_motion:
+      name: Toilet
+    binary_sensor.hue_motion_sensor_3_motion:
+      name: Eerste verdieping
+    binary_sensor.hue_motion_sensor_4_motion:
+      name: Bovenverdieping
+    binary_sensor.hue_motion_sensor_5_motion:
+      name: Leefruimte
+
+# automations
+automation:
+  # reload homekit randomly as it becomes unresponsive every now and then
+  - alias: 'Homekit - reload'
+    id: automation_homekit_reload
+    trigger:
+      - platform: time_pattern
+        minutes: '/37'
+    action:
+      - service: homekit.reload

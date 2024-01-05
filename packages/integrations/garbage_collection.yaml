@@ -1,0 +1,31 @@
+---
+# Garbage collection (afvalbeheer)
+
+afvalbeheer:
+  disableicons: 1
+  dutch: 1
+  postcode: !secret afvalbeheer_zipcode
+  streetname: !secret afvalbeheer_streetname
+  streetnumber: !secret afvalbeheer_streetnumber
+  wastecollector: RecycleApp
+  upcomingsensor: 1
+  resources:
+    - gft
+    - papier
+    - pmd
+    - restafval
+
+automation:
+  - alias: 'notification - garbage collection'
+    id: garbage_collection_notification
+    trigger:
+      - platform: time
+        at: '20:00:00'
+    condition:
+      - condition: template
+        value_template: "{{ states.sensor.recycleapp_morgen.state != \"Geen\" }}"
+    action:
+      - service: notify.parents_phone_app
+        data:
+          title: 'Afvalophaling'
+          message: "Morgen ophaling van {{ states.sensor.recycleapp_morgen.state }}."

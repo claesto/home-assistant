@@ -1,0 +1,11 @@
+---
+# Home Assistant core integrations
+
+cloud:
+default_config:
+
+frontend:
+  themes: !include_dir_merge_named ../../themes
+  extra_module_url: /hacsfiles/hass-hue-icons/hass-hue-icons.js
+
+hassio:

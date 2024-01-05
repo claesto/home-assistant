@@ -1,0 +1,16 @@
+---
+# Bathroom
+
+automation:
+  # Turn on the guest bathroom light
+  - alias: 'lighting - guest bathroom - turn on movement'
+    id: guest_bathroom_lighting_turn_on_movement
+    use_blueprint:
+      path: homeassistant/motion_light.yaml
+      input:
+        light_target:
+          entity_id: light.lamp_toilet
+        no_motion_wait: 30
+        motion_entity_lux: 200
+        motion_entity_lux_meter: sensor.hue_motion_sensor_2_illuminance
+        motion_entity: binary_sensor.hue_motion_sensor_2_motion

@@ -1,0 +1,18 @@
+template:
+  sensor:
+    - name: Lights on counter
+      unit_of_measurement: ""
+      state: >
+        {% set lights_on = [
+          states.switch.stopcontact_woonkamer_rechts,
+          states.light.lamp_toilet,
+          states.light.lamp_berging,
+          states.light.lamp_voorgevel,
+          states.light.lamp_zijtuin,
+          states.light.lamp_master_bedroom,
+          states.light.nachtlamp,
+          states.light.lamp_bureau_tom_actie,
+          states.light.ilyas,
+          states.light.soraya,
+        ] %} 
+        {{ lights_on | selectattr('state','eq','on') | list | count }}

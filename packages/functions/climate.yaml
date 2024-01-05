@@ -1,0 +1,162 @@
+---
+# Weather
+
+# fetch weather data from a local weather station (Vlinder project)
+rest:
+  resource: https://wow.meteo.be/services/wow/ajax/getLatestObservation.php?id=23f30a34-269b-e911-80e7-0003ff59889d
+  scan_interval: 60
+  sensor:
+    - name: "vlinder_data_temperature"
+      value_template: '{{ value_json["primary"]["dt"] }}'
+      unit_of_measurement: '°C'
+    - name: "vlinder_data_wind_speed"
+      value_template: '{{ value_json["primary"]["dws"] }}'
+      unit_of_measurement: 'km/h'
+    - name: "vlinder_data_wind_direction"
+      value_template: '{{ value_json["primary"]["dwd"] }}'
+    - name: "vlinder_data_humidity"
+      value_template: '{{ value_json["primary"]["dh"] }}'
+      unit_of_measurement: '%'
+    - name: "vlinder_data_pressure"
+      value_template: '{{ value_json["primary"]["dm"] }}'
+      unit_of_measurement: 'hPa'
+    - name: "vlinder_data_rainfall"
+      value_template: '{{ value_json["primary"]["drr"] }}'
+      unit_of_measurement: 'mm/h'
+
+# meteo Alarm sensor for Antwerp, Belgium
+binary_sensor:
+  - platform: meteoalarm
+    country: "belgium"
+    province: "Antwerp"
+    language: "nl-BE"
+
+# average indoor temperature
+sensor:
+  - platform: min_max
+    name: Average indoor temperature
+    type: mean
+    round_digits: 1
+    entity_ids:
+      - sensor.hue_motion_sensor_3_temperature
+      - sensor.hue_motion_sensor_4_temperature
+      - sensor.hue_motion_sensor_5_temperature
+
+# template for weather conditions in Dutch
+template:
+  sensor:
+    - name: Weather conditions Dutch
+      state: >-
+        {%- set state = states('weather.keizershoek') -%}
+        {% if state == 'clear-night' %} Helder, nacht
+        {% elif state == 'cloudy' %} Bewolkt
+        {% elif state == 'exceptional' %} Uitzonderlijk
+        {% elif state == 'fog' %} Mist
+        {% elif state == 'hail' %} Hagel
+        {% elif state == 'lightning' %} Bliksem
+        {% elif state == 'lightning-rainy' %} Bliksem, regenachtig
+        {% elif state == 'partlycloudy' %} Gedeeltelijk bewolkt
+        {% elif state == 'pouring' %} Hevige regen
+        {% elif state == 'rainy' %} Regenachtig
+        {% elif state == 'snowy' %} Sneeuwachtig
+        {% elif state == 'snowy-rainy' %} Sneeuw-, regenachtig
+        {% elif state == 'sunny' %} Zonnig
+        {% elif state == 'windy' %} Winderig
+        {% elif state == 'windy-variant' %} Winderig
+        {% else %} Geen voorspelling
+        {% endif %}
+
+    - name: Weather predicted conditions Dutch
+      state: >-
+          {%- set state = states('input_text.weather_forecast') -%}
+          {% if state == 'clear-night' %} Helder, nacht
+          {% elif state == 'cloudy' %} Bewolkt
+          {% elif state == 'exceptional' %} Uitzonderlijk
+          {% elif state == 'fog' %} Mist
+          {% elif state == 'hail' %} Hagel
+          {% elif state == 'lightning' %} Bliksem
+          {% elif state == 'lightning-rainy' %} Bliksem, regenachtig
+          {% elif state == 'partlycloudy' %} Gedeeltelijk bewolkt
+          {% elif state == 'pouring' %} Hevige regen
+          {% elif state == 'rainy' %} Regenachtig
+          {% elif state == 'snowy' %} Sneeuwachtig
+          {% elif state == 'snowy-rainy' %} Sneeuw-, regenachtig
+          {% elif state == 'sunny' %} Zonnig
+          {% elif state == 'windy' %} Winderig
+          {% elif state == 'windy-variant' %} Winderig
+          {% else %} Geen voorspelling
+          {% endif %}
+
+# helpers
+input_number:
+  weather_forecast_next_day_max_temperature:
+    name: 'Weather - forecast max. temperature'
+    min: -50
+    max: 50
+    step: 0.1
+  weather_forecast_next_day_min_temperature:
+    name: 'Weather - forecast min. temperature'
+    min: -50
+    max: 50
+    step: 0.1
+  weather_forecast_next_day_wind_speed:
+    name: 'Weather - forecast wind speed'
+    min: 0
+    max: 250
+    step: 0.1
+  weather_forecast_next_day_precipitation:
+    name: 'Weather - forecast precipitation'
+    min: 0
+    max: 200
+    step: 0.1
+input_text:
+  weather_forecast_next_day:
+    name: 'Weather - forecast'
+
+automation:
+    # send notification on severe weather warnings
+  - alias: 'notification - severe weather'
+    id: weather_severe_weather_notification
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.meteoalarm
+        from: 'off'
+    action:
+      - service: notify.parents_phone_app
+        data:
+          title: "{{state_attr('binary_sensor.meteoalarm', 'headline')}}"
+          message: "{{state_attr('binary_sensor.meteoalarm', 'description')}} vanaf {{state_attr('binary_sensor.meteoalarm', 'effective')}}"
+
+    # save weather forecast for tomorrow in some helpers
+    # used to send an accurate weather report for the day in the morning
+  - alias: 'weather - save forecast for tomorrow'
+    id: weather_store_next_day_forecast
+    trigger:
+      - platform: time
+        at: '23:45:00'
+    action:
+      - service: input_number.set_value
+        data:
+          value: "{{ state_attr('weather.buienradar', 'forecast')[0].templow | float }}"
+        target:
+          entity_id: input_number.weather_forecast_next_day_min_temperature
+      - service: input_number.set_value
+        data:
+          value: "{{ state_attr('weather.buienradar', 'forecast')[0].temperature | float }}"
+        target:
+          entity_id: input_number.weather_forecast_next_day_max_temperature
+      - service: input_number.set_value
+        data:
+          value: "{{ state_attr('weather.buienradar', 'forecast')[0].precipitation | float }}"
+        target:
+          entity_id: input_number.weather_forecast_next_day_precipitation
+      - service: input_number.set_value
+        data:
+          value: "{{ state_attr('weather.buienradar', 'forecast')[0].wind_speed | float }}"
+        target:
+          entity_id: input_number.weather_forecast_next_day_wind_speed
+      - service: input_text.set_value
+        data:
+          value: "{{ state_attr('weather.buienradar', 'forecast')[0].condition }}"
+        target:
+          entity_id: input_text.weather_forecast_next_day
