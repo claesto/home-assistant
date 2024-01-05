@@ -10,13 +10,12 @@
 *.db-shm
 *.db-wal
 *.sqlite
-
+.shopping_list.json
 .cloud
 .storage
 .uuid
 .homekit.state
 
-core.*
 OZW_Log.txt
 
 secrets.yaml
