@@ -1,1 +1,22 @@
-function t(t,e,s,i){var r,n=arguments.length,a=n<3?e:null===i?i=Object.getOwnPropertyDescriptor(e,s):i;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)a=Reflect.decorate(t,e,s,i);else for(var o=t.length-1;o>=0;o--)(r=t[o])&&(a=(n<3?r(a):n>3?r(e,s,a):r(e,s))||a);return n>3&&a&&Object.defineProperty(e,s,a),a}"function"==typeof SuppressedError&&SuppressedError;const e=globalThis,s=e.ShadowRoot&&(void 0===e.ShadyCSS||e.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,i=Symbol(),r=new WeakMap
+import nodeResolve from "@rollup/plugin-node-resolve";
+import json from "@rollup/plugin-json";
+import typescript from "rollup-plugin-typescript2";
+import { terser } from "rollup-plugin-terser";
+import { getBabelOutputPlugin } from "@rollup/plugin-babel";
+
+const dev = process.env.ROLLUP_WATCH;
+
+export default {
+  input: "src/main.ts",
+  output: {
+    file: "slider-entity-row.js",
+    format: "es",
+  },
+  plugins: [
+    nodeResolve(),
+    json(),
+    typescript(),
+    getBabelOutputPlugin({ presets: ["@babel/preset-env"] }),
+    !dev && terser({ format: { comments: false } }),
+  ],
+};
