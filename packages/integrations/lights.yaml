@@ -37,3 +37,31 @@ light:
     entities:
       - light.lamp_voorgevel
       - light.lamp_zijtuin
+
+  - platform: group
+    name: Attic lights
+    entities:
+      - light.soraya
+      - light.ilyas
+
+  - platform: group
+    name: First floor lights
+    entities:
+      - light.nachtlamp
+      - light.lamp_bureau_tom_actie
+      - light.lamp_master_bedroom
+
+  - platform: group
+    name: Ground floor lights
+    entities:
+      - light.lamp_berging
+      - light.lamp_toilet
+      - light.stopcontact_woonkamer_rechts
+
+  - platform: group
+    name: All lights
+    entities:
+      - light.ground_floor_lights
+      - light.first_floor_lights
+      - light.attic_lights
+      - light.outside_lights

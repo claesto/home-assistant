@@ -1,0 +1,23 @@
+{
+    "config": {
+      "step": {
+        "user": {
+          "title": "Configure Alfen Wallbox",
+          "description": "Enter IP address of your Alfen Wallbox.",
+          "data": { 
+            "host": "Host", 
+            "name": "Friendly name", 
+            "username": "Username",
+            "password": "Password"
+          }
+        }
+      },
+      "abort": {
+        "device_timeout": "Timeout connecting to the device.",
+        "device_fail": "Unexpected error creating device.",
+        "already_configured": "Device is already configured.",
+        "invalid_current_limit": "Invalid current limit (1 - 32A)."
+      }
+    }
+  }
+  

@@ -1,0 +1,10 @@
+{
+    "domain": "alfen_wallbox",
+    "name": "Alfen Wallbox",
+    "version": "0.0.1",
+    "config_flow": true,    
+    "documentation": "https://github.com/egnerfl/alfen_wallbox",
+    "dependencies": [],
+    "codeowners": ["egnerfl"],
+    "zeroconf": ["_alfen._tcp.local."]
+  }

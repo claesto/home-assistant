@@ -1,0 +1,15 @@
+---
+# Zoning information
+
+zone:
+  - name: !secret work_tom_hq
+    latitude: !secret work_tom_hq_lat
+    longitude: !secret work_tom_hq_long
+    icon: mdi:office-building
+    radius: 625
+
+  - name: !secret work_sara_hq
+    latitude: !secret work_sara_hq_lat
+    longitude: !secret work_sara_hq_long
+    icon: mdi:office-building
+    radius: 150

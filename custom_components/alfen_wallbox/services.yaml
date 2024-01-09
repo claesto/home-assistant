@@ -1,0 +1,29 @@
+reboot_wallbox:
+  description: Reboot alfen wallbox
+  fields:
+    entity_id:
+      description: Name(s) of entities to change.
+      example: "alfen_wallbox.garage"
+
+set_current_limit:
+  description: Set current charge limit
+  fields:
+    entity_id:
+      description: Name(s) of entities to change.
+      example: "alfen_wallbox.garage"
+    limit:
+      description: New limit.
+
+enable_rfid_authorization_mode:
+  description: Enables RFID auth mode
+  fields:
+    entity_id:
+      description: Name(s) of entities to change.
+      example: "alfen_wallbox.garage"
+
+disable_rfid_authorization_mode:
+  description: Disables RFID auth mode
+  fields:
+    entity_id:
+      description: Name(s) of entities to change.
+      example: "alfen_wallbox.garage"      
