@@ -31,8 +31,8 @@ binary_sensor:
     province: "Antwerp"
     language: "nl-BE"
 
-# average indoor temperature
 sensor:
+    # average indoor temperature
   - platform: min_max
     name: Average indoor temperature
     type: mean
@@ -41,6 +41,14 @@ sensor:
       - sensor.hue_motion_sensor_3_temperature
       - sensor.hue_motion_sensor_4_temperature
       - sensor.hue_motion_sensor_5_temperature
+
+  - platform: template
+    sensors:
+      vlinder_wind_direction_orientation:
+        value_template: >
+          {% set direction = ['N', 'NNO', 'NO', 'ONO', 'O', 'OZO', 'ZO', 'ZZO', 'Z', 'ZZW', 'ZW', 'WZW', 'W', 'WNW', 'NW', 'NNW', 'N'] %}
+          {% set degree = states('sensor.vlinder_data_wind_direction') | float %}
+          {{ direction[((degree + 11.25) / 22.5) | int] }}
 
 template:
   - trigger:
