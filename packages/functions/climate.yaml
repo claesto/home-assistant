@@ -3,7 +3,7 @@
 
 # fetch weather data from a local weather station (Vlinder project)
 rest:
-  resource: https://wow.meteo.be/services/wow/ajax/getLatestObservation.php?id=23f30a34-269b-e911-80e7-0003ff59889d
+  resource: !secret vlinder_weather_station
   scan_interval: 60
   sensor:
     - name: "vlinder_data_temperature"
