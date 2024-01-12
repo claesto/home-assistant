@@ -42,6 +42,23 @@ sensor:
       - sensor.hue_motion_sensor_4_temperature
       - sensor.hue_motion_sensor_5_temperature
 
+template:
+  - trigger:
+    - platform: time_pattern
+      minutes: "/1"
+    sensor:
+      # calculate the wind chill temperature index based on input from a local weather station 
+      - name: "vlinder_wcti"
+        unit_of_measurement: "°C"
+        state: >
+          {% set outdoor_t = states('sensor.vlinder_data_temperature') | float %}
+          {% set outdoor_ws = states('sensor.vlinder_data_wind_speed') | float %}
+          {% if outdoor_ws > 1 %}
+            {{ '%0.1f' | format(13.12 + 0.6215 * outdoor_t - 11.37 * outdoor_ws**0.16 + 0.3965 * outdoor_t * outdoor_ws**0.16) }}
+          {% else %} 
+            {{ outdoor_t }}
+          {% endif %}
+          
 automation:
     # send notification on severe weather warnings
   - alias: 'notification - severe weather'
