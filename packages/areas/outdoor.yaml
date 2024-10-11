@@ -10,7 +10,7 @@ automation:
       input:
         light_target: 
           entity_id:
-            - light.outside_lights
+            - light.lamp_voorgevel
         offset_time: '00:20:00'
 
   # turn off the outdoor lights after 23:30

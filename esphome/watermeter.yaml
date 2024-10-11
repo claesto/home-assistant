@@ -1,0 +1,79 @@
+esphome:
+  name: watermeter
+  friendly_name: watermeter
+
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "u/JJ1rG8nsiMCU88HDmoBN5N80fYO84j7P2/lAvI9XQ="
+
+ota:
+  password: "dddf44c3ca5e55083401d4447f03de59"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Watermeter Fallback Hotspot"
+    password: "SYxG8IISIOZj"
+
+captive_portal:
+
+sensor:
+  - platform: pulse_counter
+    pin:
+      number: GPIO12
+      allow_other_uses: true
+    update_interval: 6s
+    name: "water pulse"
+    id: water_pulse
+
+  - platform: pulse_meter
+    pin:
+      number: GPIO12
+      allow_other_uses: true
+    name: "water pulse meter"
+    unit_of_measurement: "liter/min"
+    icon: "mdi:water"
+    total:
+      name: "water meter total info"
+      unit_of_measurement: "m³"
+      id: water_meter_total_info
+      accuracy_decimals: 3
+      device_class: water
+      state_class: total_increasing
+      filters:
+        - multiply: 0.001
+
+  - platform: template
+    name: "water usage liter"
+    id: water_flow_rate
+    accuracy_decimals: 1
+    unit_of_measurement: "l/min"
+    icon: "mdi:water"
+    lambda: return(id(water_pulse).state * 10);
+    update_interval: 6s
+
+  # - platform: pulse_meter
+  #   pin: 
+  #     number: GPIO12
+  #   name: "Water Pulse Meter"
+  #   unit_of_measurement: "liter/min"
+  #   icon: "mdi:water"
+  #   total:
+  #     name: "Water Meter Total"
+  #     unit_of_measurement: "m³"
+  #     id: water_meter_total
+  #     accuracy_decimals: 3
+  #     device_class: water
+  #     state_class: total_increasing
+  #     filters:
+  #       - multiply: 0.001

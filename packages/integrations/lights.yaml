@@ -59,6 +59,12 @@ light:
       - light.stopcontact_woonkamer_rechts
 
   - platform: group
+    name: Master bedroom lights
+    entities:
+      - light.nachtlamp
+      - light.lamp_master_bedroom
+
+  - platform: group
     name: All lights
     entities:
       - light.ground_floor_lights

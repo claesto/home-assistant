@@ -1,14 +1,12 @@
 """Config flow to configure component."""
-import logging
-
 import voluptuous as vol
 from homeassistant import config_entries
-from homeassistant.const import CONF_HOST, CONF_USERNAME, \
-    CONF_PASSWORD, CONF_ADDRESS, CONF_PORT
-from .nhccoco.coco_discover_profiles import CoCoDiscoverProfiles
+from homeassistant.const import CONF_HOST, CONF_USERNAME, CONF_PASSWORD, CONF_ADDRESS, CONF_PORT
+from .nhccoco.coco_profiles import CoCoProfiles
 from .nhccoco.coco_login_validation import CoCoLoginValidation
+from .const import DOMAIN
 
-from .const import DOMAIN, KEY_MANUAL
+import logging
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -94,11 +92,25 @@ class Nhc2FlowHandler(config_entries.ConfigFlow):
     async def async_step_manual_host(self, user_input=None):
         self._errors = {}
 
-        disc = CoCoDiscoverProfiles(user_input[CONF_HOST])
-        self._all_cocos = await disc.get_all_profiles()
+        user_input_host = user_input[CONF_HOST]
+        profiles = await CoCoProfiles(user_input_host).get_all_profiles()
+
+        try:
+            host = socket.gethostbyaddr(user_input_host)[0]
+        except:
+            host = None
+
+        self._all_cocos = [
+            (
+                user_input_host,
+                None,
+                profiles,
+                host
+            )
+        ]
+
         if self._all_cocos is not None and len(self._all_cocos) == 1:
             self._selected_coco = self._all_cocos[0]
-            _LOGGER.debug(str(self._all_cocos))
             for coco in self._all_cocos:
                 if coco[2] is None:
                     return self.async_abort(reason="no_controller_found")
@@ -134,33 +146,5 @@ class Nhc2FlowHandler(config_entries.ConfigFlow):
             data_schema=vol.Schema({
                 vol.Required(CONF_USERNAME, default=first): vol.In(profile_listing),
                 vol.Required(CONF_PASSWORD, default=None): str
-            }),
-        )
-
-    async def async_step_reauth(self, user_input=None):
-        return await self.async_step_reauth_confirm()
-
-    async def async_step_reauth_confirm(self, user_input=None):
-        config_entry = self.hass.config_entries.async_get_entry(self.context["entry_id"])
-
-        if user_input is not None:
-            data = config_entry.data.copy()
-            data[CONF_PASSWORD] = user_input[CONF_PASSWORD]
-
-            validator = CoCoLoginValidation(data[CONF_HOST], data[CONF_USERNAME], data[CONF_PASSWORD], data[CONF_PORT])
-            check = await validator.check_connection()
-
-            if check > 0:
-                _LOGGER.error("Authentication failed: %d", check)
-                self._errors["base"] = ("login_check_fail_%d" % check)
-            else:
-                self.hass.config_entries.async_update_entry(config_entry, data=data)
-                return self.async_abort(reason="reauth_successful")
-
-        return self.async_show_form(
-            step_id="reauth_confirm",
-            errors=self._errors,
-            data_schema=vol.Schema({
-                vol.Required(CONF_PASSWORD, default=None): str,
             }),
         )

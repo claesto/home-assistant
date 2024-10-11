@@ -14,5 +14,5 @@ notify:
   - name: 'Parents phone app'
     platform: group
     services:
-      - service: mobile_app_iphone_van_tom
+      - service: mobile_app_iphone_van_tom_v
       - service: mobile_app_iphone_van_sara

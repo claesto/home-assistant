@@ -1,0 +1,20 @@
+---
+
+# automation:
+  # Turn on car preheat/cool based on calendar events
+  # TODO:
+  #   - include destination + waze travel time to destination
+#   - alias: 'car - preheat/cool based on calendar events'
+#     id: 242c7ed8-7279-4f66-a319-15198d054680
+#     trigger:
+#       - platform: calendar
+#         event: start
+#         offset: "-00:10:00"
+#         entity_id: calendar.id3
+#     condition: []
+#     action:
+#       - service: volkswagen_we_connect_id.volkswagen_id_set_climatisation
+#         data:
+#           start_stop: start
+#           target_temp: 20
+#           vin: !secret id3_vin

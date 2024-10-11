@@ -18,6 +18,10 @@ from .entities.electricity_clamp_centralmeter_clamp_type import Nhc2ElectricityC
 from .entities.electricity_clamp_centralmeter_flow import Nhc2ElectricityClampCentralmeterFlowEntity
 from .entities.electricity_clamp_centralmeter_segment import Nhc2ElectricityClampCentralmeterSegmentEntity
 from .entities.garagedoor_action_basicstate import Nhc2GaragedoorActionBasicStateEntity
+from .entities.generic_chargingstation_charging_status import Nhc2GenericChargingstationChargingStatusEntity
+from .entities.generic_chargingstation_coupling_status import Nhc2GenericChargingstationCouplingStatusEntity
+from .entities.generic_chargingstation_electrical_power import Nhc2GenericChargingstationElectricalPowerEntity
+from .entities.generic_chargingstation_ev_status import Nhc2GenericChargingstationEvStatusEntity
 from .entities.generic_domestichotwaterunit_coupling_status import Nhc2GenericDomestichotwaterunitCouplingStatusEntity
 from .entities.generic_energyhome_electrical_power_consumption import \
     Nhc2GenericEnergyhomeElectricalPowerConsumptionEntity
@@ -31,12 +35,15 @@ from .entities.generic_fan_co2 import Nhc2GenericFanCo2Entity
 from .entities.generic_fan_coupling_status import Nhc2GenericFanCouplingStatusEntity
 from .entities.generic_fan_humidity import Nhc2GenericFanHumidityEntity
 from .entities.generic_hvac_coupling_status import Nhc2GenericHvacCouplingStatusEntity
+from .entities.generic_inverter_coupling_status import Nhc2GenericInverterCouplingStatusEntity
+from .entities.generic_inverter_electrical_power_production import Nhc2GenericInverterElectricalPowerProductionEntity
 from .entities.generic_smartplug_electrical_power import Nhc2GenericSmartplugElectricalPowerEntity
 from .entities.hvacthermostat_hvac_setpoint_temperature import Nhc2HvacthermostatHvacSetpointTemperatureEntity
 from .entities.hvacthermostat_hvac_overrule_setpoint import Nhc2HvacthermostatHvacOverruleSetpointEntity
 from .entities.hvacthermostat_hvac_overrule_time import Nhc2HvacthermostatHvacOverruleTimeEntity
 from .entities.motor_action_last_direction import Nhc2MotorActionLastDirectionEntity
 from .entities.naso_smartplug_electrical_power import Nhc2NasoSmartplugElectricalPowerEntity
+from .entities.playerstatus_action_feedback_message import Nhc2PlayerstatusActionFeedbackMessageEntity
 from .entities.reynaers_action_status import Nhc2ReynaersActionStatusEntity
 from .entities.robinsip_videodoorstation_call_status_01 import Nhc2RobinsipVideodoorstationCallStatus01Entity
 from .entities.robinsip_videodoorstation_ip_address import Nhc2RobinsipVideodoorstationIpAddressEntity
@@ -48,11 +55,18 @@ from .entities.thermostat_hvac_overrule_setpoint import Nhc2ThermostatHvacOverru
 from .entities.thermostat_thermostat_setpoint_temperature import Nhc2ThermostatThermostatSetpointTemperatureEntity
 from .entities.thermostat_thermostat_overrule_time import Nhc2ThermostatThermostatOverruleTimeEntity
 from .entities.thermostat_thermostat_overrule_setpoint import Nhc2ThermostatThermostatOverruleSetpointEntity
+from .entities.thermoswitchx_multisensor_ambient_temperature import Nhc2ThermoswitchxMultisensorAmbientTemperatureEntity
+from .entities.thermoswitchx_multisensor_heat_index import Nhc2ThermoswitchxMultisensorHeatIndexEntity
+from .entities.thermoswitchx_multisensor_humidity import Nhc2ThermoswitchxMultisensorHumidityEntity
 from .entities.velux_action_feedback import Nhc2VeluxActionFeedbackEntity
+from .entities.virtual_hvac_setpoint_temperature import Nhc2VirtualHvacSetpointTemperatureEntity
+from .entities.virtual_hvac_overrule_time import Nhc2VirtualHvacOverruleTimeEntity
+from .entities.virtual_hvac_overrule_setpoint import Nhc2VirtualHvacOverruleSetpointEntity
 from .nhccoco.devices.accesscontrol_action import CocoAccesscontrolAction
 from .nhccoco.devices.audiocontrol_action import CocoAudiocontrolAction
 from .nhccoco.devices.alarms_action import CocoAlarmsAction
 from .nhccoco.devices.bellbutton_action import CocoBellbuttonAction
+from .nhccoco.devices.generic_chargingstation import CocoGenericChargingstation
 from .nhccoco.devices.electricity_clamp_centralmeter import CocoElectricityClampCentralmeter
 from .nhccoco.devices.gate_action import CocoGateAction
 from .nhccoco.devices.garagedoor_action import CocoGaragedoorAction
@@ -60,9 +74,11 @@ from .nhccoco.devices.generic_domestichotwaterunit import CocoGenericDomestichot
 from .nhccoco.devices.generic_energyhome import CocoGenericEnergyhome
 from .nhccoco.devices.generic_fan import CocoGenericFan
 from .nhccoco.devices.generic_hvac import CocoGenericHvac
+from .nhccoco.devices.generic_inverter import CocoGenericInverter
 from .nhccoco.devices.generic_smartplug import CocoGenericSmartplug
 from .nhccoco.devices.hvacthermostat_hvac import CocoHvacthermostatHvac
 from .nhccoco.devices.naso_smartplug import CocoNasoSmartplug
+from .nhccoco.devices.playerstatus_action import CocoPlayerstatusAction
 from .nhccoco.devices.reynaers_action import CocoReynaersAction
 from .nhccoco.devices.robinsip_videodoorstation import CocoRobinsipVideodoorstation
 from .nhccoco.devices.rolldownshutter_action import CocoRolldownshutterAction
@@ -70,9 +86,12 @@ from .nhccoco.devices.simulation_action import CocoSimulationAction
 from .nhccoco.devices.sunblind_action import CocoSunblindAction
 from .nhccoco.devices.thermostat_hvac import CocoThermostatHvac
 from .nhccoco.devices.thermostat_thermostat import CocoThermostatThermostat
+from .nhccoco.devices.thermoswitchx_multisensor import CocoThermoswitchxMultisensor
 from .nhccoco.devices.touchswitch_hvac import CocoTouchswitchHvac
 from .nhccoco.devices.velux_action import CocoVeluxAction
 from .nhccoco.devices.venetianblind_action import CocoVenetianblindAction
+from .nhccoco.devices.virtual_hvac import CocoVirtualHvac
+from .nhccoco.devices.virtual_thermostat import CocoVirtualThermostat
 
 from .const import DOMAIN, KEY_GATEWAY
 
@@ -147,8 +166,22 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         async_add_entities(entities)
 
     device_instances = gateway.get_device_instances(CocoThermostatHvac)
-    device_instances += gateway.get_device_instances(CocoTouchswitchHvac)
-    _LOGGER.info('→ Found %s NHC Thermostat (thermostat, touchswitch)', len(device_instances))
+    _LOGGER.info('→ Found %s NHC Thermostat (thermostat)', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            entities.append(Nhc2ThermostatHvacSetpointTemperatureEntity(device_instance, hub, gateway))
+
+            if device_instance.supports_overrule_setpoint:
+                entities.append(Nhc2ThermostatHvacOverruleSetpointEntity(device_instance, hub, gateway))
+
+            if device_instance.supports_overrule_time:
+                entities.append(Nhc2ThermostatHvacOverruleTimeEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
+    device_instances = gateway.get_device_instances(CocoTouchswitchHvac)
+    _LOGGER.info('→ Found %s NHC Thermostat (touchswitch)', len(device_instances))
     if len(device_instances) > 0:
         entities = []
         for device_instance in device_instances:
@@ -301,6 +334,47 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
         async_add_entities(entities)
 
+    device_instances = gateway.get_device_instances(CocoPlayerstatusAction)
+    _LOGGER.info('→ Found %s NHC Player status action', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            entities.append(Nhc2PlayerstatusActionFeedbackMessageEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
+    device_instances = gateway.get_device_instances(CocoThermoswitchxMultisensor)
+    _LOGGER.info('→ Found %s NHC Thermo switch', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            if device_instance.supports_heat_index:
+                entities.append(Nhc2ThermoswitchxMultisensorHeatIndexEntity(device_instance, hub, gateway))
+
+            if device_instance.supports_ambient_temperature:
+                entities.append(Nhc2ThermoswitchxMultisensorAmbientTemperatureEntity(device_instance, hub, gateway))
+
+            if device_instance.supports_humidity:
+                entities.append(Nhc2ThermoswitchxMultisensorHumidityEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
+    device_instances = gateway.get_device_instances(CocoVirtualHvac)
+    device_instances += gateway.get_device_instances(CocoVirtualThermostat)
+    _LOGGER.info('→ Found %s NHC Virtual Thermostat, Virtual Thermostat', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            entities.append(Nhc2VirtualHvacSetpointTemperatureEntity(device_instance, hub, gateway))
+
+            if device_instance.supports_overrule_time:
+                entities.append(Nhc2VirtualHvacOverruleTimeEntity(device_instance, hub, gateway))
+
+            if device_instance.supports_overrule_setpoint:
+                entities.append(Nhc2VirtualHvacOverruleSetpointEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
     device_instances = gateway.get_device_instances(CocoRobinsipVideodoorstation)
     _LOGGER.info('→ Found %s Robinsip Videodoorstations (undocumented)', len(device_instances))
     if len(device_instances) > 0:
@@ -309,5 +383,33 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
             entities.append(Nhc2RobinsipVideodoorstationCallStatus01Entity(device_instance, hub, gateway))
             entities.append(Nhc2RobinsipVideodoorstationIpAddressEntity(device_instance, hub, gateway))
             entities.append(Nhc2RobinsipVideodoorstationStatusEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
+    device_instances = gateway.get_device_instances(CocoGenericInverter)
+    _LOGGER.info('→ Found %s Generic Inverter Implementations (undocumented)', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            if device_instance.supports_coupling_status:
+                entities.append(Nhc2GenericInverterCouplingStatusEntity(device_instance, hub, gateway))
+            if device_instance.supports_electrical_power_production:
+                entities.append(Nhc2GenericInverterElectricalPowerProductionEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
+    device_instances = gateway.get_device_instances(CocoGenericChargingstation)
+    _LOGGER.info('→ Found %s Easee/Eve Chargingstation Implementations (undocumented)', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            if device_instance.supports_coupling_status:
+                entities.append(Nhc2GenericChargingstationCouplingStatusEntity(device_instance, hub, gateway))
+            if device_instance.supports_electrical_power:
+                entities.append(Nhc2GenericChargingstationElectricalPowerEntity(device_instance, hub, gateway))
+            if device_instance.supports_ev_status:
+                entities.append(Nhc2GenericChargingstationEvStatusEntity(device_instance, hub, gateway))
+            if device_instance.supports_charging_status:
+                entities.append(Nhc2GenericChargingstationChargingStatusEntity(device_instance, hub, gateway))
 
         async_add_entities(entities)

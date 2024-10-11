@@ -2,9 +2,8 @@ import aiohttp
 from homeassistant.components.mjpeg.camera import MjpegCamera
 from homeassistant.const import HTTP_BASIC_AUTHENTICATION
 
-from ..const import DOMAIN, BRAND
-
 from ..nhccoco.devices.robinsip_videodoorstation import CocoRobinsipVideodoorstation
+from .nhc_entity import NHCBaseEntity
 
 from PIL import ImageFile
 
@@ -13,22 +12,16 @@ import logging
 _LOGGER = logging.getLogger(__name__)
 
 
-class Nhc2RobinsipVideodoorstationCameraEntity(MjpegCamera):
+class Nhc2RobinsipVideodoorstationCameraEntity(NHCBaseEntity, MjpegCamera):
     _attr_has_entity_name = True
     _attr_name = None
 
     def __init__(self, device_instance: CocoRobinsipVideodoorstation, hub, gateway):
         """Initialize a camera sensor."""
+        super().__init__(device_instance, hub, gateway)
 
-        self._device = device_instance
-        self._hub = hub
-        self._gateway = gateway
-
-        self._device.after_change_callbacks.append(self.on_change)
-
-        self._attr_available = self._device.is_online
         self._attr_unique_id = device_instance.uuid
-        self._attr_should_poll = False
+
         self._attr_is_streaming = True
 
         self._username = 'admin'
@@ -44,22 +37,6 @@ class Nhc2RobinsipVideodoorstationCameraEntity(MjpegCamera):
             username=self._username,
             password=self._password,
         )
-
-    @property
-    def device_info(self):
-        """Return the device info."""
-        return {
-            'identifiers': {
-                (DOMAIN, self._device.uuid)
-            },
-            'name': self._device.name,
-            'manufacturer': BRAND,
-            'model': str.title(f'{self._device.model} ({self._device.type})'),
-            'via_device': self._hub
-        }
-
-    def on_change(self):
-        self.schedule_update_ha_state()
 
     async def async_camera_image(self, width: int | None = None, height: int | None = None) -> bytes | None:
         # This is a workaround for the fact that the camera sometimes returns stills of 1x1 pixels

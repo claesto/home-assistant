@@ -13,3 +13,9 @@ zone:
     longitude: !secret work_sara_hq_long
     icon: mdi:office-building
     radius: 150
+
+  - name: !secret padel_pollepel
+    latitude: !secret padel_pollepel_lat
+    longitude: !secret padel_pollepel_long
+    icon: mdi:tennis-ball
+    radius: 150

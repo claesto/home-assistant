@@ -9,20 +9,26 @@ rest:
     - name: "vlinder_data_temperature"
       value_template: '{{ value_json["primary"]["dt"] }}'
       unit_of_measurement: '°C'
+      state_class: measurement
     - name: "vlinder_data_wind_speed"
       value_template: '{{ value_json["primary"]["dws"] }}'
       unit_of_measurement: 'km/h'
+      state_class: measurement
     - name: "vlinder_data_wind_direction"
       value_template: '{{ value_json["primary"]["dwd"] }}'
+      state_class: measurement
     - name: "vlinder_data_humidity"
       value_template: '{{ value_json["primary"]["dh"] }}'
       unit_of_measurement: '%'
+      state_class: measurement
     - name: "vlinder_data_pressure"
       value_template: '{{ value_json["primary"]["dm"] }}'
       unit_of_measurement: 'hPa'
+      state_class: measurement
     - name: "vlinder_data_rainfall"
       value_template: '{{ value_json["primary"]["drr"] }}'
       unit_of_measurement: 'mm/h'
+      state_class: measurement
 
 # meteo Alarm sensor for Antwerp, Belgium
 binary_sensor:

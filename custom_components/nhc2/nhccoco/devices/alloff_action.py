@@ -1,10 +1,7 @@
-from ..const import DEVICE_DESCRIPTOR_PROPERTIES, PROPERTY_BASIC_STATE, PROPERTY_ALL_OFF_ACTIVE, \
-    PROPERTY_ALL_OFF_ACTIVE_VALUE_TRUE, PROPERTY_BASIC_STATE_VALUE_ON, PROPERTY_BASIC_STATE_VALUE_TRIGGERED
+from ..const import PROPERTY_BASIC_STATE, PROPERTY_ALL_OFF_ACTIVE, \
+    PROPERTY_ALL_OFF_ACTIVE_VALUE_TRUE, PROPERTY_BASIC_STATE_VALUE_ON, PROPERTY_BASIC_STATE_VALUE_TRIGGERED, \
+    PROPERTY_ALL_STARTED, PROPERTY_ALL_STARTED_VALUE_TRUE
 from .device import CoCoDevice
-
-import logging
-
-_LOGGER = logging.getLogger(__name__)
 
 
 class CocoAlloffAction(CoCoDevice):
@@ -24,14 +21,17 @@ class CocoAlloffAction(CoCoDevice):
     def is_all_off_active(self) -> bool:
         return self.all_off_active == PROPERTY_ALL_OFF_ACTIVE_VALUE_TRUE
 
-    def on_change(self, topic: str, payload: dict):
-        _LOGGER.debug(f'{self.name} changed. Topic: {topic} | Data: {payload}')
-        if DEVICE_DESCRIPTOR_PROPERTIES in payload:
-            self.merge_properties(payload[DEVICE_DESCRIPTOR_PROPERTIES])
+    @property
+    def all_started(self) -> str:
+        return self.extract_property_value(PROPERTY_ALL_STARTED)
 
-        if self._after_change_callbacks:
-            for callback in self._after_change_callbacks:
-                callback()
+    @property
+    def is_all_started(self) -> bool:
+        return self.all_started == PROPERTY_ALL_STARTED_VALUE_TRUE
+
+    @property
+    def supports_all_started(self) -> bool:
+        return self.has_property(PROPERTY_ALL_STARTED)
 
     def press(self, gateway):
         gateway.add_device_control(

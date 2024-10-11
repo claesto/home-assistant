@@ -12,19 +12,24 @@ from .entities.flag_action_switch import Nhc2FlagActionSwitchEntity
 from .entities.electricity_clamp_centralmeter_disable_report_instant_usage_re_enabling import \
     Nhc2ElectricityClampCentralmeterDisableReportInstantUsageReEnablingEntity
 from .entities.generic_action_basicstate import Nhc2GenericActionBasicStateEntity
+from .entities.generic_chargingstation_status import Nhc2GenericChargingstationStatusEntity
 from .entities.generic_domestichotwaterunit_boost import Nhc2GenericDomestichotwaterunitBoostEntity
 from .entities.generic_energyhome_disable_report_instant_usage_re_enabling import \
     Nhc2GenericEnergyhomeDisableReportInstantUsageReEnablingEntity
 from .entities.generic_fan_boost import Nhc2GenericFanBoostEntity
 from .entities.generic_hvac_overrule_active import Nhc2GenericHvacOverruleActiveEntity
+from .entities.generic_inverter_disable_report_instant_usage_re_enabling import \
+    Nhc2GenericInverterDisableReportInstantUsageReEnablingEntity
 from .entities.generic_smartplug_disable_report_instant_usage_re_enabling import \
     Nhc2GenericSmartplugDisableReportInstantUsageReEnablingEntity
+from .entities.generic_smartplug_status import Nhc2GenericSmartplugStatusEntity
 from .entities.hvacthermostat_hvac_ecosave import Nhc2HvacthermostatHvacEcoSaveEntity
 from .entities.hvacthermostat_hvac_thermostat_on import Nhc2HvacthermostatHvacThermostatOnEntity
 from .entities.hvacthermostat_hvac_overrule_active import Nhc2HvacthermostatHvacOverruleActiveEntity
 from .entities.hvacthermostat_hvac_protect_mode import Nhc2HvacthermostatHvacProtectModeEntity
 from .entities.naso_smartplug_disable_report_instant_usage_re_enabling import \
     Nhc2NasoSmartplugDisableReportInstantUsageReEnablingEntity
+from .entities.naso_smartplug_status import Nhc2NasoSmartplugStatusEntity
 from .entities.overallcomfort_action_basicstate import Nhc2OverallcomfortActionBasicStateEntity
 from .entities.pir_action_basicstate import Nhc2PirActionBasicStateEntity
 from .entities.relay_action_switch import Nhc2RelayActionSwitchEntity
@@ -33,9 +38,12 @@ from .entities.thermostat_hvac_ecosave import Nhc2ThermostatHvacEcoSaveEntity
 from .entities.thermostat_hvac_overrule_active import Nhc2ThermostatHvacOverruleActiveEntity
 from .entities.thermostat_thermostat_ecosave import Nhc2ThermostatThermostatEcoSaveEntity
 from .entities.thermostat_thermostat_overrule_active import Nhc2ThermostatThermostatOverruleActiveEntity
+from .entities.virtual_hvac_ecosave import Nhc2VirtualHvacEcoSaveEntity
+from .entities.virtual_hvac_overrule_active import Nhc2VirtualHvacOverruleActiveEntity
 from .nhccoco.devices.accesscontrol_action import CocoAccesscontrolAction
 from .nhccoco.devices.bellbutton_action import CocoBellbuttonAction
 from .nhccoco.devices.condition_action import CocoConditionAction
+from .nhccoco.devices.generic_chargingstation import CocoGenericChargingstation
 from .nhccoco.devices.flag_action import CocoFlagAction
 from .nhccoco.devices.electricity_clamp_centralmeter import CocoElectricityClampCentralmeter
 from .nhccoco.devices.generic_action import CocoGenericAction
@@ -43,6 +51,7 @@ from .nhccoco.devices.generic_domestichotwaterunit import CocoGenericDomestichot
 from .nhccoco.devices.generic_energyhome import CocoGenericEnergyhome
 from .nhccoco.devices.generic_fan import CocoGenericFan
 from .nhccoco.devices.generic_hvac import CocoGenericHvac
+from .nhccoco.devices.generic_inverter import CocoGenericInverter
 from .nhccoco.devices.generic_smartplug import CocoGenericSmartplug
 from .nhccoco.devices.hvacthermostat_hvac import CocoHvacthermostatHvac
 from .nhccoco.devices.naso_smartplug import CocoNasoSmartplug
@@ -55,6 +64,8 @@ from .nhccoco.devices.switched_generic_action import CocoSwitchedGenericAction
 from .nhccoco.devices.thermostat_hvac import CocoThermostatHvac
 from .nhccoco.devices.thermostat_thermostat import CocoThermostatThermostat
 from .nhccoco.devices.touchswitch_hvac import CocoTouchswitchHvac
+from .nhccoco.devices.virtual_hvac import CocoVirtualHvac
+from .nhccoco.devices.virtual_thermostat import CocoVirtualThermostat
 
 from .const import DOMAIN, KEY_GATEWAY
 
@@ -121,8 +132,19 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         async_add_entities(entities)
 
     device_instances = gateway.get_device_instances(CocoThermostatHvac)
-    device_instances += gateway.get_device_instances(CocoTouchswitchHvac)
-    _LOGGER.info('→ Found %s NHC Thermostat (thermostat, touchswitch)', len(device_instances))
+    _LOGGER.info('→ Found %s NHC Thermostat (thermostat)', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            entities.append(Nhc2ThermostatHvacOverruleActiveEntity(device_instance, hub, gateway))
+
+            if device_instance.supports_ecosave:
+                entities.append(Nhc2ThermostatHvacEcoSaveEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
+    device_instances = gateway.get_device_instances(CocoTouchswitchHvac)
+    _LOGGER.info('→ Found %s NHC Thermostat (touchswitch)', len(device_instances))
     if len(device_instances) > 0:
         entities = []
         for device_instance in device_instances:
@@ -185,6 +207,8 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         entities = []
         for device_instance in device_instances:
             entities.append(Nhc2NasoSmartplugDisableReportInstantUsageReEnablingEntity(device_instance, hub, gateway))
+            if device_instance.supports_status:
+                entities.append(Nhc2NasoSmartplugStatusEntity(device_instance, hub, gateway))
 
         async_add_entities(entities)
 
@@ -196,6 +220,9 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
             entities.append(
                 Nhc2GenericSmartplugDisableReportInstantUsageReEnablingEntity(device_instance, hub, gateway)
             )
+
+            if device_instance.supports_status:
+                entities.append(Nhc2GenericSmartplugStatusEntity(device_instance, hub, gateway))
 
         async_add_entities(entities)
 
@@ -252,11 +279,46 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
         async_add_entities(entities)
 
+    device_instances = gateway.get_device_instances(CocoVirtualHvac)
+    device_instances += gateway.get_device_instances(CocoVirtualThermostat)
+    _LOGGER.info('→ Found %s NHC Virtual Thermostat, Virtual Thermostat', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            entities.append(Nhc2VirtualHvacOverruleActiveEntity(device_instance, hub, gateway))
+
+            if device_instance.supports_ecosave:
+                entities.append(Nhc2VirtualHvacEcoSaveEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
     device_instances = gateway.get_device_instances(CocoConditionAction)
     _LOGGER.info('→ Found %s Condition actions (undocumented)', len(device_instances))
     if len(device_instances) > 0:
         entities = []
         for device_instance in device_instances:
             entities.append(Nhc2ConditionActionSwitchEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
+    device_instances = gateway.get_device_instances(CocoGenericInverter)
+    _LOGGER.info('→ Found %s Generic Inverter Implementations (undocumented)', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            if device_instance.supports_coupling_status:
+                entities.append(
+                    Nhc2GenericInverterDisableReportInstantUsageReEnablingEntity(device_instance, hub, gateway))
+
+        async_add_entities(entities)
+
+    device_instances = gateway.get_device_instances(CocoGenericChargingstation)
+    _LOGGER.info('→ Found %s Easee/Eve Chargingstation Implementations (undocumented)', len(device_instances))
+    if len(device_instances) > 0:
+        entities = []
+        for device_instance in device_instances:
+            # if device_instance.supports_stat:
+            entities.append(
+                Nhc2GenericChargingstationStatusEntity(device_instance, hub, gateway))
 
         async_add_entities(entities)
