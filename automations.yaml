@@ -44,3 +44,20 @@
 
       '
   mode: single
+- id: '1731669813079'
+  alias: Dryer - dryer cycle finished
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - sensor.droger_operation_state
+    from: run
+    to: finished
+  conditions: []
+  actions:
+  - action: notify.parents_phone_app
+    metadata: {}
+    data:
+      title: Droogkast
+      message: De droogkast is klaar!
+  mode: single
