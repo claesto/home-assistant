@@ -14,5 +14,7 @@ template:
           states.light.lamp_bureau_tom_actie,
           states.light.ilyas,
           states.light.soraya,
+          states.light.on_off_plug_1,
+          states.light.on_off_plug_1_2
         ] %} 
         {{ lights_on | selectattr('state','eq','on') | list | count }}

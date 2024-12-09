@@ -50,6 +50,7 @@ light:
       - light.nachtlamp
       - light.lamp_bureau_tom_actie
       - light.lamp_master_bedroom
+      - light.on_off_plug_1
 
   - platform: group
     name: Ground floor lights
@@ -57,6 +58,7 @@ light:
       - light.lamp_berging
       - light.lamp_toilet
       - light.stopcontact_woonkamer_rechts
+      - light.on_off_plug_1_2
 
   - platform: group
     name: Master bedroom lights

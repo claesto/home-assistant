@@ -28,6 +28,8 @@ homekit:
       - sensor.hue_motion_sensor_3_temperature
       - sensor.hue_motion_sensor_4_temperature
       - sensor.hue_motion_sensor_5_temperature
+      - light.on_off_plug_1
+      - light.on_off_plug_1_2
 
   # customization
   entity_config:
@@ -86,6 +88,10 @@ homekit:
       name: Bovenverdieping
     binary_sensor.hue_motion_sensor_5_motion:
       name: Leefruimte
+    light.on_off_plug_1:
+      name: Lamp bureau
+    light.on_off_plug_1_2:
+      name: Kerstboom
 
 # automations
 automation:
