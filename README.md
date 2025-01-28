@@ -24,6 +24,7 @@ Tom Claessens - [@claesto](https://twitter.com/claesto) - [Buy me a coffee](http
 Project Link: [https://github.com/claesto/home-assistant](https://github.com/claesto/home-assistant)
 
 [license-shield]: https://img.shields.io/github/license/claesto/home-assistant.svg?style=for-the-badge
-[license-url]: https://github.com/claesto/home-assistant
+[license-url]: https://github.com/claesto/home-assistant/blob/master/LICENSE.txt
+
 [commits-shield]: https://img.shields.io/github/commit-activity/y/claesto/home-assistant.svg?style=for-the-badge
 [commits-url]: https://github.com/claesto/home-assistant/commits/master/
