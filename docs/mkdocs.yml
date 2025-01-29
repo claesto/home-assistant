@@ -1,0 +1,24 @@
+site_name: Home Assistant configuration
+
+theme:
+  features:
+    - content.tooltips
+  font:
+    text: Ubuntu Sans
+  name: material
+  palette:
+    primary: blue
+
+repo_name: Home Assistant config
+repo_url: https://github.com/claesto/home-assistant
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+nav:
+  - Introduction: 'index.md'
