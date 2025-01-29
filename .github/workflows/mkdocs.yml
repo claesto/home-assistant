@@ -30,5 +30,7 @@ jobs:
 
     - name: Deploy to GitHub Pages
       run: mkdocs gh-deploy --force --remote-name origin --remote-branch gh-pages
+      with:
+          token: ${{ secrets.PAT }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
