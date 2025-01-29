@@ -6,7 +6,9 @@ on:
       - master  # Change this if your default branch is different
 
 permissions:
-  contents: write  # This allows pushing to gh-pages
+  contents: write  # Allows pushing to gh-pages
+  pages: write     # Allows GitHub Pages deployment
+  id-token: write  # Required for publishing # This allows pushing to gh-pages
 
 jobs:
   deploy:
