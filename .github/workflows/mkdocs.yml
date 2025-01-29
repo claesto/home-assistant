@@ -5,6 +5,9 @@ on:
     branches:
       - master  # Change this if your default branch is different
 
+permissions:
+  contents: write  # This allows pushing to gh-pages
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -22,4 +25,6 @@ jobs:
       run: pip install mkdocs mkdocs-material
 
     - name: Deploy to GitHub Pages
-      run: mkdocs gh-deploy --force
+      run: mkdocs gh-deploy --force --remote-name origin --remote-branch gh-pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
