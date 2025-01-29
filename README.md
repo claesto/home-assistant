@@ -10,8 +10,26 @@ With custom automations, scripts, and dashboards, this configuration is tailored
 
 This repository serves as a hub for sharing, improving, and evolving my smart home setup while inspiring others to create their own personalized automation systems.
 
-
 Don't forget to :star: if this configuration helped you or [buy me a coffee](https://paypal.me/tomclaessens).
+
+## Structure
+To maintain an organized and manageable configuration, I have chosen to use [Home Assistant's Packages](https://www.home-assistant.io/docs/configuration/packages/) functionality. This approach enables me to keep all related code consolidated in one place.
+
+_Some information is stored in `secrets.yml`, which is not uploaded for obvious reasons._
+
+## Architecture
+
+### Core system
+- Raspberry Pi 4 (4GB)
+- Backups to Synology NAS
+- MariaDB as database (on Synology NAS)
+
+### Smart home integration
+- HUE bridge for several lights & Zigbee power plugs
+- Niko home control for non-HUE lights
+- Shelly for power monitoring
+- Sonos / Marantz integrations to control audio
+- HomeKit bridge for use within the iOS ecosystem
 
 ## License
 
