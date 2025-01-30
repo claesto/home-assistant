@@ -1,4 +1,4 @@
-site_name: Home Assistant configuration
+site_name: Home Assistant setup
 
 theme:
   features:
@@ -22,3 +22,8 @@ markdown_extensions:
 
 nav:
   - Introduction: 'index.md'
+  - My smart home: 'smarthome.md'
+  - Integrations: 'integrations.md'
+  - Add-ons: 'addons.md'
+  - Dashboards: 'lovelace.md'
+  - Automations: 'automations.md'
